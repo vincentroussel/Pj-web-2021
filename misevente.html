@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>mise en vente</title>
+	<meta charset="utf-8">
+</head>
+<body>
+	<form action="misevente.php" method="POST">
+		<table>
+			<tr>
+				<td>Nom de l'objet:</td>
+				<td><input type="text" name="nom"></td>
+			</tr>
+			<tr>
+				<td>Prix(en euros):</td>
+				<td><input type="number" name="prix"> </td>
+			</tr>
+			<tr>
+				<td>Qualites:</td>
+				<td><input type="text" name="qualites"> </td>
+			</tr>
+			<tr>
+				<td>Defauts:</td>
+				<td><input type="text" name="defauts"> </td>
+			</tr>
+			<tr>
+				<td>Ville:</td>
+				<td><input type="text" name="ville"> </td>
+			</tr>
+			<tr>
+				<td>A quelle categorie appartient votre objet?</td>
+				<td>
+				 <SELECT name="categorieobjet" size="1">
+      				<OPTION>Meubles et objets d'art
+      				<OPTION>Accessoires VIP
+      				<OPTION>Materiels scolaire
+    			</SELECT>
+    			</td>
+			</tr>
+			<tr>
+				<td>Comment voulez-vous mettre en vente votre objet?</td>
+				<td>
+				 <SELECT name="categorieobjet" size="1">
+      				<OPTION>Enchère
+      				<OPTION>Vente directe
+      				<OPTION>Négociation
+    			</SELECT>
+    			</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">
+				<input type="submit" name="mettre en vente" >
+			</td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>
