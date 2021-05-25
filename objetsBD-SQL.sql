@@ -31,8 +31,9 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `objets`;
 CREATE TABLE IF NOT EXISTS `objets` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `Nom` varchar(255) NOT NULL,
-  `Prix` int(11) NOT NULL,
+  `IDvendeur` int(11),
+  `Nom` varchar(255),
+  `Prix` int(11),
   `Defauts` varchar(255) ,
   `Qualites` varchar(255) ,
   `Ville` varchar(255) ,
