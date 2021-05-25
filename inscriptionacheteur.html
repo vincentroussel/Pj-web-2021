@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>S'inscrire en tant qu'acheteur</title>
+	<meta charset="utf-8">
+	<h2>Veuillez procéder à votre inscription en tant qu'acheteur. </h2>
+	<script type="text/javascript">
+		function cocherCase(Case)
+		{
+			recupValeurElement("Checkbox" + Case).checked = true;
+		}
+		function recupererValeurElement(Element)
+		{
+			if (document.getElementById)
+			{
+				return document.getElementById(Element);
+			}
+			else if (document.all)
+			{
+				return document.all[Element];
+			}
+		}
+		function recupererValeurCase(){
+
+
+			if(recupererValeurElement("Checkboxbis").checked){
+				recupererValeurElement("RetourTest").value = 'Cocher';
+			}
+			else{
+				recupererValeurElement("RetourTest").value = '';
+				alert("Merci de bien vouloir cocher la case pour accepter les conditions d'utilisation du compte acheteur.");
+			}
+		}
+
+	</script>
+</head>
+<body>
+	<form action="inscriptionacheteur.php" method="POST" action="votrecompte.html">
+		<table>
+			<tr>
+				<td>Nom:</td>
+				<td><input type="text" name="nom"></td>
+			</tr>
+			<tr>
+				<td>Prénom:</td>
+				<td><input type="text" name="prenom"> </td>
+			</tr>
+			<tr>
+				<td>Adresse:</td>
+				<td><input type="text" name="adresse"> </td>
+			</tr>
+			<tr>
+				<td>Mail:</td>
+				<td><input type="email" name="mail"> </td>
+			</tr>
+			<tr>
+				<td>Mot de passe:</td>
+				<td><input type="password" name="password"> </td>
+			</tr>
+			<tr>
+				<td>Numéro de carte:</td>
+				<td><input type="password" minlength="16" maxlength="16" name="password" required pattern="[0-9]{16}"></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">
+				<input type="submit" value="Inscription">
+			</td>
+			</tr>
+		</table>
+		<input TYPE=CHECKBOX UNCHECKED name="Checkboxbis" id="Checkboxbis" value="Pouet" type="CHECKBOX">
+			J'accepte de me soumettre au contrat légal m'obligeant à acheter un bien si mon offre est approuvée par le vendeur.
+			<p><input type="submit" value="Envoyer" onclick="recupererValeurCase()"></p>
+	<p>Retour à la page d'accès à <a href="votrecompte.html">votre compte.</a></p>
+	</form>
+			
+</body>
+</html>
