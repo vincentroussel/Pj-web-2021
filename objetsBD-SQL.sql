@@ -36,6 +36,7 @@ CREATE TABLE IF NOT EXISTS `objets` (
   `Defauts` varchar(255) NOT NULL,
   `Qualites` varchar(255) NOT NULL,
   `Ville` varchar(255) NOT NULL,
+  `Photos` varchar(255) NOT NULL,
   `Typevente` int(11) NOT NULL, -- je pensais 1-enchere 2-vente directe 3-negociation
   `Categorie` int(3), -- je sais pas encore si on a besoin de categoriser les produits disponible sur la marketplace
   `Vendu` bit(2) NOT NULL, -- pour savoir si l'objet est vendu ou non
