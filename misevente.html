@@ -30,21 +30,51 @@
 			<tr>
 				<td>A quelle categorie appartient votre objet?</td>
 				<td>
-				 <SELECT name="categorieobjet" size="1">
+				 <!--<input type="radio" name="categorieobjet" >
       				<OPTION>Meubles et objets d'art
       				<OPTION>Accessoires VIP
       				<OPTION>Materiels scolaire
-    			</SELECT>
+    			</input>-->
+    			<div>
+  <input type="radio" id="meubles" name="categorieobjet" value="meubles"
+         checked>
+  <label for="meubles">Meubles et objets d'art</label>
+</div>
+
+<div>
+  <input type="radio" id="access" name="categorieobjet" value="access">
+  <label for="dewey">Accessoires VIP</label>
+</div>
+
+<div>
+  <input type="radio" id="mat" name="categorieobjet" value="mat">
+  <label for="louie">Materiels scolaire</label>
+</div>
     			</td>
 			</tr>
 			<tr>
 				<td>Comment voulez-vous mettre en vente votre objet?</td>
 				<td>
-				 <SELECT name="categorieobjet" size="1">
+					<div>
+  <input type="radio" id="enchere" name="categorievente" value="enchere"
+         checked>
+  <label for="meubles">Enchere</label>
+</div>
+
+<div>
+  <input type="radio" id="vente" name="categorievente" value="vente">
+  <label for="dewey">Vente directe</label>
+</div>
+
+<div>
+  <input type="radio" id="nego" name="categorievente" value="nego">
+  <label for="louie">negociation</label>
+</div>
+				 <!--<input name="categorieobjet" size="1">
       				<OPTION>Enchère
       				<OPTION>Vente directe
       				<OPTION>Négociation
-    			</SELECT>
+    			</input>-->
     			</td>
 			</tr>
 			<tr>
