@@ -55,7 +55,7 @@ if ($db_found) {
 			echo "<th>" . $data['Qualites'] . "</th>";
 			echo "<th>" . $data['Ville'] . "</th>";
 			echo "<th>" . $data['Photos'] . "</th>";
-			echo "<th>" . $data['Type de vente'] . "</th>";
+			echo "<th>" . $data['Typevente'] . "</th>";
 			echo "<th>" . $data['Categorie'] . "</th>";
 			echo "</tr>";
 		}
