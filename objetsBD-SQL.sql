@@ -40,6 +40,6 @@ CREATE TABLE IF NOT EXISTS `objets` (
   `Photos` varchar(255) ,
   `Typevente` varchar(255) , -- je pensais 1-enchere 2-vente directe 3-negociation
   `Categorie` varchar(255), -- je sais pas encore si on a besoin de categoriser les produits disponible sur la marketplace
-  `Vendu` bit(2) , -- pour savoir si l'objet est vendu ou non
+  `IDvendu` int(11) , -- pour savoir si l'objet est vendu ou non
   PRIMARY KEY (`ID`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
