@@ -31,12 +31,12 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `acheteurs`;
 CREATE TABLE IF NOT EXISTS `acheteurs` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `Nom` varchar(255) NOT NULL,
-  `Prenom` varchar(255) NOT NULL,
-  `Adresse` varchar(255) NOT NULL,
-  `Mail` varchar(255) NOT NULL,
-  `Motdepasse` varchar(255) NOT NULL,
-  `Numcarte` int(50) NOT NULL,
+  `Nom` varchar(255),
+  `Prenom` varchar(255),
+  `Adresse` varchar(255),
+  `Mail` varchar(255),
+  `Motdepasse` varchar(255),
+  `Numcarte` int(50),
   
   PRIMARY KEY (`ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
