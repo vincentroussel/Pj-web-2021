@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-	<title>Ventes Flash ECE MarketPlace</title>
+	<title>Achat immédiat</title>
 	<meta charset="utf-8">
 	<meta name= "viewport" content= "width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -37,15 +37,15 @@
 		}
  	</style>
 </head>
+</head>
 <body>
 	<div class="container-fluid">
 		<div class="row; text-white bg-info">
-			<h1 class="text-center">Bienvenue sur l'espace ventes flash de l'ECE MarketPlace <img src="ecemarketplace.jpg"></h1>
+			<h1 class="text-center">Espace meilleure offre de l'ECE MarketPlace <img src="ecemarketplace.jpg"></h1>
 		</div>
 		<div class="row; text-white bg-info">
 			<p>L'ECE MarketPlace est un site de vente en ligne pour la communauté ECE.<br> Vendez ou bien achetez, des produits de bonne qualité en utilisant nos diverses méthodes : négociation, vente aux enchères ou tout simplement en achat/vente instantané(e).<br> ECE MarketPlace, la plateforme de vente où tout devient possible.</p>
 		</div>
-
 		<nav class="navbar navbar-inverse">
   			<div class="container-fluid">
     			<div class="navbar-header">
@@ -62,51 +62,59 @@
         					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"aria-haspopup="true"aria-expanded="false">Tout Parcourir</a>
         					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
         						<a class="dropdown-item" href="achatimmediat.html">Achat immédiat</a>
-        						<a class="dropdown-item" href="meilleuroffre.html">Meilleure Offre</a>
+        						<a class="active dropdown-item" href="meilleuroffre.html">Meilleure Offre</a>
         						<a class="dropdown-item" href="transactionacheteurvendeur.html">Transaction Acheteur/Vendeur</a>
         					</div>
         				</li>
         				<li><a href="votrecompte.html">Notifications</a></li>
-        				<li class="active"><a href="#">Ventes Flash</a></li>
+        				<li><a href="ventesflash.html">Ventes Flash</a></li>
       				</ul>
       				<ul class="nav navbar-nav navbar-right navbar-expand">
       					<li><a href="votrecompte.html"><span class="glyphicon glyphicon-log-in"></span> Panier <img src="panier.jpg" width="20" height="20"></a></li>
-       			 		<li><a href="votrecompte.html"><span class="glyphicon glyphicon-log-in"></span> Votre Compte</a></li>
+       			 		<li ><a href="votrecompte.html"><span class="glyphicon glyphicon-log-in"></span> Votre Compte</a></li>
       				</ul>
     			</div>
   			</div>
-		</nav>
-		<h2>Best-sellers</h2>
-		<div id="moncarousel" class="carousel slide" data-ride="carousel" data-interval="2000">
-			<ol class="carousel-indicators">
-				<li data-target="#moncarousel" data-slide-to="0" class="active"></li>
-				<li data-target="#moncarousel" data-slide-to="1"></li>
-				<li data-target="#moncarousel" data-slide-to="2"></li>
-			</ol>
-			<div class="carousel-inner">
-				<div class="carousel-item active">
-					<img src="macbookpro.jpg" class="d-block">
-					<p>Prix : 1000 euros</p>
-				</div>
-				<div class="carousel-item">
-					<img src="joconde.jpg" class="d-block">
-					<p>Prix : 12 000 euros</p>
-				</div>
-				<div class="carousel-item">
-					<img src="rolex.jpg" class="d-block">
-					<p>Prix : 35 000 euros</p>
-				</div>
-			</div>
-			<a href="#moncarousel" class="carousel-control-prev" role="button" data-slide="prev">
-				<span class="carousel-control-prev-icon" aria-hidden="ture"></span>
-				<span class="sr-only">Précédent</span>
-			</a>
-			<a href="#moncarousel" class="carousel-control-next" role="button" data-slide="next">
-				<span class="carousel-control-next-icon" aria-hidden="ture"></span>
-				<span class="sr-only">Suivant</span>
-			</a>
-		</div>
-		<div id="footer">Copyright &copy; ECE MarketPlace 2021<br>
+		</nav><br>
+		<h2>Catégories</h2>
+	<FORM>
+    <SELECT name="typeobjet" size="1">
+      <OPTION>Toutes catégories
+      <OPTION>Meubles et objets d'art
+      <OPTION>Accessoires VIP
+      <OPTION>Matériels scolaires
+    </SELECT>
+    </FORM><br>
+    <div id="moncarousel" class="carousel slide" data-ride="carousel" data-interval="2000">
+      <ol class="carousel-indicators">
+        <li data-target="#moncarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#moncarousel" data-slide-to="1"></li>
+        <li data-target="#moncarousel" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="lapleureuse.jpg" class="d-block">
+          <p> Prix : 8 000 euros</p>
+        </div>
+        <div class="carousel-item">
+          <img src="bagueenor.jpg" class="d-block">
+          <p>Prix : 2 500 euros</p>
+        </div>
+        <div class="carousel-item">
+          <img src="iphone12pro.jpg" class="d-block">
+          <p>Prix : 1 399 euros</p>
+        </div>
+      </div>
+      <a href="#moncarousel" class="carousel-control-prev" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="ture"></span>
+        <span class="sr-only">Précédent</span>
+      </a>
+      <a href="#moncarousel" class="carousel-control-next" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="ture"></span>
+        <span class="sr-only">Suivant</span>
+      </a>
+    </div>
+	  <div id="footer">Copyright &copy; ECE MarketPlace 2021<br>
 			<p>Vous pouvez-nous contacter :
 			<ul>
 				<li>Par téléphone au <em>(+33) 07 60 52 04 07</em></li>
@@ -114,6 +122,6 @@
 				<li>ou rendez-vous chez nous au <address>37 Quai de Grenelle, 75015 Paris</address></li>
 			</ul>
 			</p>
-		</div>
+	</div>
 </body>
 </html>
