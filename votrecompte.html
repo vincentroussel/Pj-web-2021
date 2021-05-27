@@ -76,15 +76,26 @@
   			</div>
 		</nav><br>
 		<h2>Accédez à votre compte</h2>
-	<FORM>
-    <SELECT name="typeobjet" size="1">
-      <OPTION>Administrateur
-      <OPTION>Acheteur
-      <OPTION>Vendeur
-    </SELECT>
-  </FORM><br>
 	<form action="votrecompte.php" method="POST">
 		<table>
+			<tr>
+                <td>
+                    <div>
+                          <input type="radio" id="acheteur" name="typecompte" value="acheteur">
+                      <label for="acheteur">Acheteur</label>
+                    </div>
+
+                    <div>
+                      <input type="radio" id="vendeur" name="typecompte" value="vendeur">
+                      <label for="vendeur">Vendeur</label>
+                    </div>
+
+                    <div>
+                      <input type="radio" id="admin" name="typecompte" value="admin">
+                      <label for="admin">Administrateur</label>
+                    </div>
+                </td>
+            </tr>
 			<tr>
 				<td>Adresse mail:</td>
 				<td><input type="text" name="mail"></td>
