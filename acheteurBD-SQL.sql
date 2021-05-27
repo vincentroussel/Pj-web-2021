@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `acheteurs` (
   `Adresse` varchar(255),
   `Mail` varchar(255),
   `Motdepasse` varchar(255),
-  `Numcarte` int(50),
+  `Numcarte` varchar(255),
   
   PRIMARY KEY (`ID`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
