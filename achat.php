@@ -2,7 +2,7 @@
     session_start();
   ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 	<title>Achat immédiat</title>
 	<meta charset="utf-8">
@@ -90,8 +90,7 @@
                 <td>A quelle categorie appartient votre objet ?</td>
                 <td>
                     <div>
-                          <input type="radio" id="meubles" name="typeobjet" value="meubles"
-                         checked>
+                          <input type="radio" id="meubles" name="typeobjet" value="meubles">
                       <label for="meubles">Meubles et objets d'art</label>
                     </div>
 
@@ -116,9 +115,9 @@
       <?php
         $length=count($_SESSION['listeobjets']);
         var_dump($_SESSION['listeobjets']);
-        echo $_SESSION['test'];
         echo "length";
         echo $length;
+        $listeobjet  = $_SESSION['listeobjets'];
         for($i=0;$i< $length;$i++){
         ?>
     </div>
