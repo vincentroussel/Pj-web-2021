@@ -1,4 +1,5 @@
 <?php
+	session_start(); //Lyès est content
 	$nom = isset($_POST["nom"])? $_POST["nom"] : "";
 	$prenom = isset($_POST["prenom"])? $_POST["prenom"] : "";
 	$adresse = isset($_POST["adresse"])? $_POST["adresse"] : "";
@@ -8,22 +9,25 @@
 	$database = "ecemarketplace";
 	$db_handle = mysqli_connect('localhost', 'root', '' );
 	$db_found = mysqli_select_db($db_handle, $database);
+	$numcarteint = intval($numcarte, 10);
 	if ($db_found) {
-		$sql="SELECT mail FROM acheteur";
+		$sql="SELECT Mail FROM acheteurs";
 		$result = mysqli_query($db_handle, $sql);
 		$binaire = 1;
 		while ($data = mysqli_fetch_assoc($result)) {
-			if ($mail=="Mail:".$data['mail']) {
+			$datastr = implode("' '",$data);
+			if ($mail == $datastr) {
 				$binaire=0;
 			}
 		} 
 		if ($binaire==1) {
-			$sql="INSERT INTO acheteurs(Nom,Prenom,Adresse,Mail,Motdepasse,Numcarte) VALUES ($nom,$prenom,$adresse,$mail,$motdepasse,$numcarte)";
+			$sql="INSERT INTO acheteurs(Nom,Prenom,Adresse,Mail,Motdepasse,Numcarte) VALUES ('$nom','$prenom','$adresse','$mail','$motdepasse','$numcarte')";
+			$result = mysqli_query($db_handle, $sql);
 			echo "Inscription confirmée.<br>";
 		} else{
 			echo "Ce mail existe déjà.";
 		}
-	};
+	}
 	else {
  			echo "Database not found";
 		}
@@ -38,7 +42,7 @@
 		{ $erreur .= "Le champ Mail est vide. <br>"; }
 	if ($motdepasse == "") 
 		{$erreur .= "Le champ Mot de Passe est vide. <br>";}
-	if ($erreur == "") 
+	if ($erreur == "" && $binaire == 1) 
 		{ echo "Formulaire valide.";}
 
 	else { echo "Erreur: <br>" . $erreur; }
