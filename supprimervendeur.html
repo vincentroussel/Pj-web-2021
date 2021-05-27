@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Accueil Vendeur</title>
+	<title>Supprimer Vendeur</title>
 	<meta charset="utf-8">
   <meta name= "viewport" content= "width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -30,7 +30,7 @@
 <body>
   <div class="container-fluid">
     <div class="row; text-white bg-info">
-      <h1 class="text-center">Bienvenue sur votre espace vendeur de l'ECE MarketPlace <img src="ecemarketplace.jpg"></h1>
+      <h1 class="text-center">Bienvenue sur votre espace supprimer vendeur de l'ECE MarketPlace <img src="ecemarketplace.jpg"></h1>
     </div>
     <div class="row; text-white bg-info">
       <p>L'ECE MarketPlace est un site de vente en ligne pour la communauté ECE.<br> Vendez ou bien achetez, des produits de bonne qualité en utilisant nos diverses méthodes : négociation, vente aux enchères ou tout simplement en achat/vente instantané(e).<br> ECE MarketPlace, la plateforme de vente où tout devient possible.</p>
@@ -46,10 +46,13 @@
           </div>
           <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-expand">
-                <li class="active"><a href="pagevendeur.html">Accueil</a></li>
+                <li><a href="accueiladmin.html">Accueil</a></li>
                 <li><a href="#">Evaluer mon bien</a></li>
                 <li><a href="misevente.html">Vendre un bien</a></li>
                 <li><a href="espacevente.html">Mon espace de vente</a></li>
+                <li><a href="ajoutervendeur.html">Ajouter un vendeur</a></li>
+                <li class="active"><a href="supprimervendeur.html">Supprimer un vendeur</a></li>
+                <li><a href="supprimerobjet.html">Supprimer un objet</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right navbar-expand">
                 <li class="nav-item dropdown">
@@ -63,19 +66,20 @@
           </div>
         </div>
     </nav>
-  	<h3>Vous ignorez la valeur de votre bien?</h3>
-  			<p>Pour faire évaluer votre bien, cliquez <a href="lienexterne.com">ici</a></p>
-  		</div>
-  	</div>
-  	<br>
-  	<br>
-  	<br>
-  	<br>
-  	<h3>Vous avez un bien à mettre en vente?</h3>
-  			<p>Pour mettre votre bien en vente, cliquez <a href="lienexterne.com">ici</a></p>
-  		</div>
-  	</div>
-  </div>
+    <h2>Supprimer un vendeur</h2>
+    <form action="supprimervendeur.php" method="POST">
+    <table>
+      <tr>
+        <td>Adresse mail du vendeur:</td>
+        <td><input type="text" name="mail"></td>
+      </tr>
+      <tr>
+        <td colspan="2" align="center">
+        <input type="submit" value="Connexion" >
+        </td>
+      </tr>
+    </table>
+  </form><br>
     <div id="footer">Copyright &copy; ECE MarketPlace 2021<br>
       <p>Vous pouvez-nous contacter :
       <ul>
