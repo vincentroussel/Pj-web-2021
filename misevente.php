@@ -1,8 +1,6 @@
 <?php
-session_start();
 //identifier le nom de base de données
 echo "<meta charset=\"utf-8\">";
-$id=$_SESSION['sessionID'];
 $database = "ecemarketplace";
 //connectez-vous dans votre BDD
 //Rappel : votre serveur = localhost | votre login = root | votre mot de pass = '' (rien)
@@ -29,7 +27,7 @@ if ($db_found) {
 		echo "Un article du même nom existe déjà. <br>";
 	} else{
 		//on ajoute l'article dans la BDD
-		$sql = "INSERT INTO objets(IDvendeur, Nom, Prix, Defauts, Qualites, Ville, Photos, Typevente, Categorie) VALUES($id ,'$nom', $prix ,'$defauts','$qualites','$ville','null','$categorievente','$categorieobjet')";
+		$sql = "INSERT INTO objets(Nom, Prix, Defauts, Qualites, Typevente, Categorie) VALUES('$nom', $prix ,'$defauts','$qualites','$categorievente','$categorieobjet')";
 		$result = mysqli_query($db_handle,$sql);
 		echo "Ajout confirmé <br>";
 		//on affiche l'objet ajouté
@@ -43,8 +41,6 @@ if ($db_found) {
 		echo "<th>" . "Prix" . "</th>";
 		echo "<th>" . "Defauts" . "</th>";
 		echo "<th>" . "Qualites" . "</th>";
-		echo "<th>" . "Ville" . "</th>";
-		echo "<th>" . "Photos" . "</th>";
 		echo "<th>" . "Type de vente" . "</th>";
 		echo "<th>" . "Categorie" . "</th>";
 		echo "</tr>";
@@ -55,12 +51,17 @@ if ($db_found) {
 			echo "<th>" . $data['Prix'] . "</th>";
 			echo "<th>" . $data['Defauts'] . "</th>";
 			echo "<th>" . $data['Qualites'] . "</th>";
-			echo "<th>" . $data['Ville'] . "</th>";
-			echo "<th>" . $data['Photos'] . "</th>";
 			echo "<th>" . $data['Typevente'] . "</th>";
 			echo "<th>" . $data['Categorie'] . "</th>";
 			echo "</tr>";
 		}
+		$sql = "SELECT ID FROM objets WHERE Nom LIKE '%$nom'";
+		$result = mysqli_query($db_handle, $sql);
+		while ($data = mysqli_fetch_assoc($result)){
+			$ID = $data['ID'];
+		}
+		$sql = "UPDATE objets SET IDimages = $ID WHERE ID = $ID;";
+		$result = mysqli_query($db_handle,$sql);
 	}
 }//end if
 //si le BDD n'existe pas
