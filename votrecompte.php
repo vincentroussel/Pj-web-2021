@@ -45,7 +45,7 @@
 				}
 				if ($typecompte == 'admin') {
 					//echo "admin";
-					$URL = 'pageadmin.';
+					$URL = 'accueiladmin.';
 					//header('Location : pageadmin.html');
 				}
 			}	
