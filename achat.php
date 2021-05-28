@@ -114,9 +114,9 @@
     <div>
       <?php
         $length=count($_SESSION['listeobjets']);
-        var_dump($_SESSION['listeobjets']);
-        echo "length";
-        echo $length;
+        //var_dump($_SESSION['listeobjets']);
+        //echo "length";
+        //echo $length;
         $listeobjet  = $_SESSION['listeobjets'];
         for($i=0;$i< $length;$i++){
         ?>
