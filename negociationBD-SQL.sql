@@ -35,5 +35,6 @@ CREATE TABLE IF NOT EXISTS `negociation` (
   `prix` int(255),
   `IDvendeurs` int(11),
   `IDacheteurs` int(11),
+  `finnegociation` int(11),
   PRIMARY KEY (`ID`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
