@@ -7,7 +7,6 @@
 	$db_found = mysqli_select_db($db_handle, $database);
 	if ($db_found) {
 		$sql = "DELETE FROM vendeurs WHERE Mail='$mail' AND Nom='$nom' AND Prenom='$prenom'";
-		var_dump($sql);
 		$result = mysqli_query($db_handle,$sql);
 	}else {
  			echo "Database not found";
