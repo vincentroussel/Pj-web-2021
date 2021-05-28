@@ -30,10 +30,10 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `negociation`;
 CREATE TABLE IF NOT EXISTS `negociation` (
-  `ID` int(11) NOT NULL,
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
   `IDobjets` int(11),
   `prix` int(255),
   `IDvendeurs` int(11),
   `IDacheteurs` int(11),
   PRIMARY KEY (`ID`)
-) /*ENGINE=MyISAM AUTO_INCREMENT=1*/ DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;

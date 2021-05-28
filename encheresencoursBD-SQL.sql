@@ -30,9 +30,9 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `encheresencours`;
 CREATE TABLE IF NOT EXISTS `encheresencours` (
-  `ID` int(11) NOT NULL,
-  `Datedevente` DATETIME(),
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Datedevente` datetime,
   `IDobjets` int(11),
 
   PRIMARY KEY (`ID`)
-) /*ENGINE=MyISAM AUTO_INCREMENT=1*/ DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
