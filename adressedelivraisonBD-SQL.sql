@@ -34,8 +34,8 @@ CREATE TABLE IF NOT EXISTS `adresses_de_livraison` (
   `Adresse1` varchar(255) NOT NULL,
   `Adresse2` varchar(255),
   `Ville` varchar(255) ,
-  `Postal` int(11) ,
+  `Postal` int(55) ,
   `Pays` varchar(255) ,
-  `Telephone` int(12) ,
+  `Telephone` int(55) ,
   CONSTRAINT Adresse PRIMARY KEY (ID,Adresse2)
 ) /*ENGINE=MyISAM AUTO_INCREMENT=1*/ DEFAULT CHARSET=latin1;
