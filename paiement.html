@@ -97,7 +97,7 @@
             </tr>
             <tr>
                 <td>Code Postale:</td>
-                <td><input type="text" name="Postale"> </td>
+                <td><input type="number" name="Postale" required pattern="[0-9]{5}" > </td>
             </tr>
             <tr>
                 <td>Pays:</td>
@@ -105,7 +105,7 @@
             </tr>
             <tr>
                 <td>Numéro de téléphone:</td>
-                <td><input type="text" name="Telephone"> </td>
+                <td><input type="number" name="Telephone" required pattern="[0-9]{10}" > </td>
             </tr>
             <tr>
                 <td>
@@ -125,7 +125,7 @@
             </tr>
             <tr>
                 <td>Numéro de la carte:</td>
-                <td><input type="password" name="numcard"></td>
+                <td><input type="password" minlength="16" maxlength="16" name="numcarte" required pattern="[0-9]{16}" ></td>
             </tr>
             <tr>
                 <td>Nom affiché sur la carte:</td>
@@ -137,7 +137,7 @@
             </tr>
             <tr>
                 <td>Cryptogramme:</td>
-                <td><input type="password" name="password"> </td>
+                <td><input type="number" name="password" required pattern="[0-9]{3}" > </td>
             </tr>
             <tr>
                 <td colspan="2" align="center">
