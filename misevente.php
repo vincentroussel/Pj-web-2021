@@ -25,6 +25,9 @@
       background-color: #17A2B8;
       color: white;
     }
+    .tablo{
+    	text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -66,8 +69,10 @@
     <br>
 	<br>
 	<?php
+	session_start();
 	//identifier le nom de base de données
 	echo "<meta charset=\"utf-8\">";
+	$id=$_SESSION['sessionID'];
 	$database = "ecemarketplace";
 	//connectez-vous dans votre BDD
 	//Rappel : votre serveur = localhost | votre login = root | votre mot de pass = '' (rien)
@@ -94,7 +99,7 @@
 			echo "Un article du même nom existe déjà. <br>";
 		} else{
 			//on ajoute l'article dans la BDD
-			$sql = "INSERT INTO objets(Nom, Prix, Defauts, Qualites, Typevente, Categorie) VALUES('$nom', $prix ,'$defauts','$qualites','$categorievente','$categorieobjet')";
+			$sql = "INSERT INTO objets(IDvendeur, Nom, Prix, Defauts, Qualites, Typevente, Categorie) VALUES($id,'$nom', $prix ,'$defauts','$qualites','$categorievente','$categorieobjet')";
 			$result = mysqli_query($db_handle,$sql);
 			echo "Ajout confirmé <br>";
 			//on affiche l'objet ajouté
@@ -123,25 +128,33 @@
 				echo "</tr>";
 			}*/
 			?>
+			<table border=2>
 			<tr>
-				<th scope="col">ID</th>
-				<th scope="col">Nom</th>
-				<th scope="col">Prix</th>
-				<th scope="col">Defauts</th>
-				<th scope="col">Qualites</th>
-				<th scope="col">Type de vente</th>
-				<th scope="col">Categorie</th>
+				<thead>
+				<th scope="col"><div class="tablo">ID</div></th>
+				<th scope="col"><div class="tablo">Nom</div></th>
+				<th scope="col"><div class="tablo">Prix</div></th>
+				<th scope="col"><div class="tablo">Defauts</div></th>
+				<th scope="col"><div class="tablo">Qualites</div></th>
+				<th scope="col"><div class="tablo">Type de vente</div></th>
+				<th scope="col"><div class="tablo">Categorie</div></th>
+				</thead>
+				</div>
 			</tr>
+			<br>
 			<?php while ($data = mysqli_fetch_assoc($result)) {?>
 				<tr>
-					<th scope="col"><?php echo $data['ID'];?> </th>
-					<th scope="col"><?php echo $data['Nom'];?> </th>
-					<th scope="col"><?php echo $data['Prix'];?> </th>
-					<th scope="col"><?php echo $data['Defauts'];?> </th>
-					<th scope="col"><?php echo $data['Qualites'];?> </th>
-					<th scope="col"><?php echo $data['Typevente'];?> </th>
-					<th scope="col"><?php echo $data['Categorie'];?> </th>
+					<tbody>
+					<th scope="row"><?php echo $data['ID'];?> </th>
+					<th><div class="tablo"><?php echo $data['Nom'];?> </div> </th>
+					<th><div class="tablo"><?php echo $data['Prix'];?> </div> </th>
+					<th><div class="tablo"><?php echo $data['Defauts'];?> </div> </th>
+					<th><div class="tablo"><?php echo $data['Qualites'];?></div>  </th>
+					<th><div class="tablo"><?php echo $data['Typevente'];?></div>  </th>
+					<th><div class="tablo"><?php echo $data['Categorie'];?> </div></th>
 				</tr>
+				</tbody>
+				</table>
 			<?php } ?>
 			<?php
 			$sql = "SELECT ID FROM objets WHERE Nom LIKE '%$nom'";
@@ -150,7 +163,7 @@
 			while ($data = mysqli_fetch_assoc($result)){
 				$ID = $data['ID'];
 			}
-			$sql = "UPDATE objets SET IDimages = $ID WHERE ID = $ID;";
+			$sql = "UPDATE objets SET IDimages = $ID WHERE ID = $ID";
 			$result = mysqli_query($db_handle,$sql);
 		}
 	}//end if
