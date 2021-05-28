@@ -1,6 +1,8 @@
 <?php
+session_start();
 //identifier le nom de base de données
 echo "<meta charset=\"utf-8\">";
+$id=$_SESSION['sessionID'];
 $database = "ecemarketplace";
 //connectez-vous dans votre BDD
 //Rappel : votre serveur = localhost | votre login = root | votre mot de pass = '' (rien)
@@ -27,7 +29,7 @@ if ($db_found) {
 		echo "Un article du même nom existe déjà. <br>";
 	} else{
 		//on ajoute l'article dans la BDD
-		$sql = "INSERT INTO objets(Nom, Prix, Defauts, Qualites, Ville, Photos, Typevente, Categorie) VALUES('$nom', $prix ,'$defauts','$qualites','$ville','null','$categorievente','$categorieobjet')";
+		$sql = "INSERT INTO objets(IDvendeur, Nom, Prix, Defauts, Qualites, Ville, Photos, Typevente, Categorie) VALUES($id ,'$nom', $prix ,'$defauts','$qualites','$ville','null','$categorievente','$categorieobjet')";
 		$result = mysqli_query($db_handle,$sql);
 		echo "Ajout confirmé <br>";
 		//on affiche l'objet ajouté
