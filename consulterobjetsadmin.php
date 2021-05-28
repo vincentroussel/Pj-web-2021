@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>consulter les objets du vendeur</title>
+	<title>consulter les objets de l'admin</title>
 	<meta charset="utf-8">
   <meta name= "viewport" content= "width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -33,7 +33,7 @@
 <body>
 	<div class="container-fluid">
     <div class="row; text-white bg-info">
-      <h1 class="text-center">Bienvenue sur votre liste d'objet en vente de l'ECE MarketPlace <img src="ecemarketplace.jpg"></h1>
+      <h1 class="text-center">Bienvenue sur votre liste d'objet en vente administrateur de l'ECE MarketPlace <img src="ecemarketplace.jpg"></h1>
     </div>
     <div class="row; text-white bg-info">
       <p>L'ECE MarketPlace est un site de vente en ligne pour la communauté ECE.<br> Vendez ou bien achetez, des produits de bonne qualité en utilisant nos diverses méthodes : négociation, vente aux enchères ou tout simplement en achat/vente instantané(e).<br> ECE MarketPlace, la plateforme de vente où tout devient possible.</p>
@@ -49,15 +49,15 @@
           </div>
           <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-expand">
-                <li><a href="pagevendeur.html">Accueil</a></li>
-                <li><a href="misevente.html">Vendre un bien</a></li>
-                <li class="active"><a href="consulterobjets.php">Mon espace de vente</a></li>
+                <li><a href="accueiladmin.html">Accueil</a></li>
+                <li><a href="miseventeadmin.html">Vendre un bien</a></li>
+                <li class="active"><a href="consulterobjetsadmin.php">Mon espace de vente</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right navbar-expand">
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="votrecompte.html" id="navbarDropdownMenuLink" data-toggle="dropdown"aria-haspopup="true"aria-expanded="false">Votre Compte</a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="profilvendeur.html">Mon Profil</a>
+                    <a class="dropdown-item" href="profiladmin.html">Mon Profil</a>
                     <a class="dropdown-item" href="votrecompte.html">Déconnexion</a>
                   </div>
                 </li>
@@ -65,7 +65,7 @@
           </div>
         </div>
     </nav>
-    <form action="traitementconsulterobjets.php" method="POST">
+    <form action="traitementconsulterobjetsadmin.php" method="POST">
     	<tr>
             <td colspan="2" align="center">
                 <input type="submit" value="consulter mes objets" >
@@ -114,7 +114,7 @@
         echo($listeobjet[$i]['Categorie']);?>
       </td>
     </tr>
-    <form action="suppressionobjetsvendeur.php" method="POST">
+    <form action="suppressionobjetsadmin.php" method="POST">
     	<input type="hidden" name="IDobjet" value="<?php echo($listeobjet[$i]['ID']); ?> ">
     	<tr>
             <td colspan="2" align="center">
