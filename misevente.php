@@ -100,7 +100,7 @@
 			//on affiche l'objet ajouté
 			$sql = "SELECT * FROM objets WHERE Nom LIKE '%$nom'";
 			$result = mysqli_query($db_handle, $sql);
-			echo "<h4>Informations sur le nouveau objet ajouté:</h4>";
+			/*echo "<h4>Informations sur le nouveau objet ajouté:</h4>";
 			echo "<table border='1'>";
 			echo "<tr>";
 			echo "<th>" . "ID" . "</th>";
@@ -121,8 +121,31 @@
 				echo "<th>" . $data['Typevente'] . "</th>";
 				echo "<th>" . $data['Categorie'] . "</th>";
 				echo "</tr>";
-			}
+			}*/
+			?>
+			<tr>
+				<th scope="col">ID</th>
+				<th scope="col">Nom</th>
+				<th scope="col">Prix</th>
+				<th scope="col">Defauts</th>
+				<th scope="col">Qualites</th>
+				<th scope="col">Type de vente</th>
+				<th scope="col">Categorie</th>
+			</tr>
+			<?php while ($data = mysqli_fetch_assoc($result)) {?>
+				<tr>
+					<th scope="col"><?php echo $data['ID'];?> </th>
+					<th scope="col"><?php echo $data['Nom'];?> </th>
+					<th scope="col"><?php echo $data['Prix'];?> </th>
+					<th scope="col"><?php echo $data['Defauts'];?> </th>
+					<th scope="col"><?php echo $data['Qualites'];?> </th>
+					<th scope="col"><?php echo $data['Typevente'];?> </th>
+					<th scope="col"><?php echo $data['Categorie'];?> </th>
+				</tr>
+			<?php } ?>
+			<?php
 			$sql = "SELECT ID FROM objets WHERE Nom LIKE '%$nom'";
+			//on met l'id de l'objet dans le ID image
 			$result = mysqli_query($db_handle, $sql);
 			while ($data = mysqli_fetch_assoc($result)){
 				$ID = $data['ID'];
