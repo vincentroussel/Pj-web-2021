@@ -61,7 +61,7 @@
                         
                     </ul>
                     <ul class="nav navbar-nav navbar-right navbar-expand">
-                        <li class="active"><a href="panier.html"><span class="glyphicon glyphicon-log-in"></span> Panier <img src="panier.jpg" width="20" height="20"></a></li>
+                        <li class="active"><a href="panier.php"><span class="glyphicon glyphicon-log-in"></span> Panier <img src="panier.jpg" width="20" height="20"></a></li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="votrecompte.html" id="navbarDropdownMenuLink" data-toggle="dropdown"aria-haspopup="true"aria-expanded="false">Votre Compte</a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
