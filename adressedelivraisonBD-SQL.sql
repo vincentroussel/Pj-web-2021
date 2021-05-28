@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `adresses_de_livraison`;
 CREATE TABLE IF NOT EXISTS `adresses_de_livraison` (
-  `ID` int(11) NOT NULL AUTO INCREMENT,
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
   `Adresse1` varchar(255),
   `Adresse2` varchar(255),
   `Ville` varchar(255) ,
