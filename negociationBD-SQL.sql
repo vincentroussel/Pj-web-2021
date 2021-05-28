@@ -25,22 +25,15 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `objets`
+-- Table structure for table `negociation`
 --
 
-DROP TABLE IF EXISTS `objets`;
-CREATE TABLE IF NOT EXISTS `objets` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `IDvendeur` int(11),
-  `Nom` varchar(255),
-  `Prix` int(11),
-  `Defauts` varchar(255) ,
-  `Qualites` varchar(255) ,
-  `IDimages` int(11),
-  `Typevente` varchar(255) , -- je pensais 1-enchere 2-vente directe 3-negociation
-  `Categorie` varchar(255), -- je sais pas encore si on a besoin de categoriser les produits disponible sur la marketplace
-  `IDvendu` int(11) , -- pour savoir si l'objet est vendu ou non
-  `IDpanier` int(11) ,
-  `IDvendeurs` int(11) ,
+DROP TABLE IF EXISTS `negociation`;
+CREATE TABLE IF NOT EXISTS `negociation` (
+  `ID` int(11) NOT NULL,
+  `IDobjets` int(11),
+  `prix` int(255),
+  `IDvendeurs` int(11),
+  `IDacheteurs` int(11),
   PRIMARY KEY (`ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) /*ENGINE=MyISAM AUTO_INCREMENT=1*/ DEFAULT CHARSET=latin1;
