@@ -24,16 +24,6 @@
          margin-bottom: 0;
          border-radius: 0;
       }
-      #moncarousel {
-         width: 50%;
-         margin: 0 auto;
-         margin-top: 50px;
-    }
-
-    .carousel-item img {
-         width: 50%;
-         height: 300px;
-    }
     #footer{
       background-color: #17A2B8;
       color: white;
@@ -69,10 +59,10 @@
                     <a class="dropdown-item" href="transactionacheteurvendeur.html">Transaction Acheteur/Vendeur</a>
                   </div>
                 </li>
-                <li><a href="notifications.html">Notifications</a></li>
+                <li><a href="notifications.php">Notifications</a></li>
               </ul>
               <ul class="nav navbar-nav navbar-right navbar-expand">
-                <li><a href="panier.html"><span class="glyphicon glyphicon-log-in"></span> Panier <img src="panier.jpg" width="20" height="20"></a></li>
+                <li><a href="panier.php"><span class="glyphicon glyphicon-log-in"></span> Panier <img src="panier.jpg" width="20" height="20"></a></li>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="votrecompte.html" id="navbarDropdownMenuLink" data-toggle="dropdown"aria-haspopup="true"aria-expanded="false">Votre Compte</a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
