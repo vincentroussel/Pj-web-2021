@@ -72,7 +72,7 @@
 	session_start();
 
 	//identifier le nom de base de données
-	echo "<meta charset=\"utf-8\">";
+	echo "<meta charset="utf-8">";
 	$id=$_SESSION['sessionID'];
 	$database = "ecemarketplace";
 	//connectez-vous dans votre BDD
