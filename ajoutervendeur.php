@@ -46,6 +46,7 @@
 	if ($db_found) {
 		$sql = "INSERT INTO vendeurs(Nom,Prenom,Mail,Motdepasse) VALUES('$nom','$prenom','$mail','$motdepasse')";
 		$result = mysqli_query($db_handle,$sql);
+    echo "Ajout confirmé <br>";
 
 	}
 	else {

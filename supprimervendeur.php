@@ -45,7 +45,9 @@
 	if ($db_found) {
 		$sql = "DELETE FROM vendeurs WHERE Mail='$mail' AND Nom='$nom' AND Prenom='$prenom'";
 		$result = mysqli_query($db_handle,$sql);
+    echo "Supression confirmée <br>";
 	}else {
+
  			echo "Database not found<br>";
 		}
 	mysqli_close($db_handle);
