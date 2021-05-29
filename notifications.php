@@ -59,7 +59,7 @@
         						<a class="dropdown-item" href="transactionacheteurvendeur.html">Transaction Acheteur/Vendeur</a>
         					</div>
         				</li>
-        				<li class="active"><a href="notifications.html">Notifications</a></li>
+        				<li class="active"><a href="notifications.php">Notifications</a></li>
         				
       				</ul>
       				<ul class="nav navbar-nav navbar-right navbar-expand">
