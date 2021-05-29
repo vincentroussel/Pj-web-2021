@@ -137,7 +137,7 @@
 			//Un article du même nom existe déjà
 			echo "Un article du même nom existe déjà. <br>";	
 			
-		}
+		}else{
 			//on ajoute l'article dans la BDD
 			$sql = "INSERT INTO objets(IDvendeur, Nom, Prix, Defauts, Qualites, Typevente, Categorie) VALUES($id,'$nom', $prix ,'$defauts','$qualites','$categorievente','$categorieobjet')";
 			$result = mysqli_query($db_handle,$sql);
@@ -190,9 +190,10 @@
 			while ($data = mysqli_fetch_assoc($result)){
 				$img = $data['image'];
 				echo "<tr>";
-				echo "<td>"."<img src='$img' height='120' width='100'>"."</td>";
+				echo "<td>"."<img src='$img' height='15%' width='15%'>"."</td>";
 				echo "</tr>";
 			}
+		}
 	}//end if
 	//si le BDD n'existe pas
 	else {
