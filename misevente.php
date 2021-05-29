@@ -28,6 +28,10 @@
     .tablo{
     	text-align: center;
     }
+    .image{
+    	height: 100%;
+    	width: 100%;
+    }
   </style>
 </head>
 <body>
@@ -190,7 +194,7 @@
 			while ($data = mysqli_fetch_assoc($result)){
 				$img = $data['image'];
 				echo "<tr>";
-				echo "<td>"."<img src='$img' height='120' width='100'>"."</td>";
+				echo "<td>"."<div class="image"><img src='$img'>"."</td></div>";
 				echo "</tr>";
 			}
 	}//end if
