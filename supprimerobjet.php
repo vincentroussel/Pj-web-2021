@@ -51,6 +51,7 @@
 		}
 	mysqli_close($db_handle);
 ?><br>
+	  Retour à l'<a href="accueiladmin.html">accueil</a>
 <div id="footer">Copyright &copy; ECE MarketPlace 2021<br>
       <p>Vous pouvez-nous contacter :
       <ul>
