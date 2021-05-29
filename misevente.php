@@ -50,8 +50,9 @@
           <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-expand">
                 <li><a href="pagevendeur.html">Accueil</a></li>
+                <li><a href="#">Evaluer mon bien</a></li>
                 <li  class="active"><a href="misevente.html">Vendre un bien</a></li>
-                <li><a href="consulterobjets.php">Mon espace de vente</a></li>
+                <li><a href="espacevente.html">Mon espace de vente</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right navbar-expand">
                 <li class="nav-item dropdown">
@@ -69,6 +70,7 @@
 	<br>
 	<?php
 	session_start();
+
 	//identifier le nom de base de données
 	echo "<meta charset=\"utf-8\">";
 	$id=$_SESSION['sessionID'];
@@ -78,6 +80,36 @@
 	$db_handle = mysqli_connect('localhost', 'root', '' );
 	$db_found = mysqli_select_db($db_handle, $database);
 
+	/*function transfert(){
+			$database = "ecemarketplace";
+			$db_handle = mysqli_connect('localhost', 'root', '' );
+			$ret = false;
+			$img_blob = '';
+			$img_taille = 0;
+			$img_nom    = '';
+			$taille_max = 250000;
+			echo $_FILES['fic']['error'];
+			$ret = is_uploaded_file($_FILES['fic']['tmp_name']);
+				if(!$ret) {
+				echo "Problème de transfert";
+            	return false;
+			}else{
+				// Le fichier a bien été reçu
+            	$img_taille = $_FILES['fic']['size'];
+            
+            	if ($img_taille > $taille_max) {
+               		echo "Le fichier est trop gros !";
+                	return false;
+            	}
+            	$img_nom  = $_FILES['fic']['name'];
+            	$img_blob = file_get_contents ($_FILES['fic']['tmp_name']);
+            	$img_bloblashes = addslashes($img_blob);
+            	$sql = "INSERT INTO images (image) VALUES ('$img_bloblashes')";
+            	var_dump($sql);
+            	$result = mysqli_query($db_handle, $sql);
+            	var_dump($result);
+            	return true;
+				}*/
 	//saisir les données de notre formulaire
 	$nom = isset($_POST["nom"])? $_POST["nom"] : "";
 	$prix = isset($_POST["prix"])? $_POST["prix"] : "";
@@ -86,17 +118,26 @@
 	$ville= isset($_POST["ville"])? $_POST["ville"] : "";
 	$categorievente= isset($_POST["categorievente"])? $_POST["categorievente"] : "";
 	$categorieobjet= isset($_POST["categorieobjet"])? $_POST["categorieobjet"] : "";
-
+	$image = isset($_POST["image"])? $_POST["image"] : "";
 	 //si le BDD existe, faire le traitement
 	if ($db_found) {
+		/*var_dump($_FILES['fic']);
+		if (isset($_FILES['fic'])) {
+				echo "On essaye de mettre l'image";
+				$imgpass = 1;
+				transfert();
+		}else{
+				echo "On essaye pas de mettre l'image";
+		}*/
 		//on va chercher le produit dans la BDD
 		$sql = "SELECT * FROM objets WHERE Nom LIKE '%$nom'";
 		$result = mysqli_query($db_handle, $sql);
 		//on regarde si il y'a des résultats
 		if (mysqli_num_rows($result) != 0) {
 			//Un article du même nom existe déjà
-			echo "Un article du même nom existe déjà. <br>";
-		} else{
+			echo "Un article du même nom existe déjà. <br>";	
+			
+		}
 			//on ajoute l'article dans la BDD
 			$sql = "INSERT INTO objets(IDvendeur, Nom, Prix, Defauts, Qualites, Typevente, Categorie) VALUES($id,'$nom', $prix ,'$defauts','$qualites','$categorievente','$categorieobjet')";
 			$result = mysqli_query($db_handle,$sql);
@@ -104,28 +145,6 @@
 			//on affiche l'objet ajouté
 			$sql = "SELECT * FROM objets WHERE Nom LIKE '%$nom'";
 			$result = mysqli_query($db_handle, $sql);
-			/*echo "<h4>Informations sur le nouveau objet ajouté:</h4>";
-			echo "<table border='1'>";
-			echo "<tr>";
-			echo "<th>" . "ID" . "</th>";
-			echo "<th>" . "Nom" . "</th>";
-			echo "<th>" . "Prix" . "</th>";
-			echo "<th>" . "Defauts" . "</th>";
-			echo "<th>" . "Qualites" . "</th>";
-			echo "<th>" . "Type de vente" . "</th>";
-			echo "<th>" . "Categorie" . "</th>";
-			echo "</tr>";
-			while ($data = mysqli_fetch_assoc($result)) {
-				echo "<tr>";
-				echo "<th>" . $data['ID'] . "</th>";
-				echo "<th>" . $data['Nom'] . "</th>";
-				echo "<th>" . $data['Prix'] . "</th>";
-				echo "<th>" . $data['Defauts'] . "</th>";
-				echo "<th>" . $data['Qualites'] . "</th>";
-				echo "<th>" . $data['Typevente'] . "</th>";
-				echo "<th>" . $data['Categorie'] . "</th>";
-				echo "</tr>";
-			}*/
 			?>
 			<table border=2>
 			<tr>
@@ -164,7 +183,16 @@
 			}
 			$sql = "UPDATE objets SET IDimages = $ID WHERE ID = $ID";
 			$result = mysqli_query($db_handle,$sql);
-		}
+			$sql = "INSERT INTO images (image, IDphotos) VALUES ('$image',$ID)";
+			$result = mysqli_query($db_handle,$sql);
+			$sql = "SELECT * FROM images WHERE IDphotos = $ID";
+			$result = mysqli_query($db_handle,$sql);
+			while ($data = mysqli_fetch_assoc($result)){
+				$img = $data['image'];
+				echo "<tr>";
+				echo "<td>"."<img src='$img' height='120' width='100'>"."</td>";
+				echo "</tr>";
+			}
 	}//end if
 	//si le BDD n'existe pas
 	else {
