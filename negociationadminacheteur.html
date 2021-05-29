@@ -66,3 +66,40 @@
           </div>
         </div>
     </nav>
+    <h2>Négociations en cours</h2>
+    <form action="negociationadminacheteurget.php" method="GET">
+        <table>
+            <tr>
+                <td>Dernière offre de l'acheteur:</td>
+                <td><input type="number" name="derniereoffreacheteur"></td>
+            </tr>
+            <tr>
+                <td>Votre dernière offre:</td>
+                <td><input type="number" name="votrederniereoffre"></td>
+            </tr>
+        </table>
+    </form><br>
+    <form action="negociationadminacheteur.php" method="POST">
+        <table>
+            <tr>
+                <td>Votre offre:</td>
+                <td><input type="number" name="votreoffre"></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                <input type="submit" value="Négocier" >
+            </td>
+            </tr>
+        </table>
+    </form><br>
+        <div id="footer">Copyright &copy; ECE MarketPlace 2021<br>
+            <p>Vous pouvez-nous contacter :
+            <ul>
+                <li>Par téléphone au <em>(+33) 07 60 52 04 07</em></li>
+                <li>Par email à <a href="mailto:ece.marketplace@gmail.com">ece.marketplace@gmail.com </a></li>
+                <li>ou rendez-vous chez nous au <address>37 Quai de Grenelle, 75015 Paris</address></li>
+            </ul>
+            </p>
+        </div>
+</body>
+</html>
