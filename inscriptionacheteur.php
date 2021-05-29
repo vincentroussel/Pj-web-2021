@@ -63,7 +63,6 @@
 			$result = mysqli_query($db_handle, $sql);
 			$sql="SELECT ID FROM acheteurs WHERE Mail = '$mail'";
 			$result = mysqli_query($db_handle, $sql);
-			var_dump($result);
 			while ($data = mysqli_fetch_assoc($result)){
 				$IDacheteurs = $data['ID'];
 			}
