@@ -41,17 +41,22 @@
 	$db_handle = mysqli_connect('localhost', 'root', '' );
 	$db_found = mysqli_select_db($db_handle, $database);
 	if ($db_found) {
+		$sql = "SELECT * FROM objets WHERE ID=$ID";
+		$result = mysqli_query($db_handle,$sql);
+		$data = mysqli_fetch_assoc($result);
+		if (is_null($data)) {
+			echo "l'objet n'existe pas <br>";
+		}else{
 		$sql = "DELETE FROM objets WHERE ID=$ID";
 		$result = mysqli_query($db_handle,$sql);
 		echo "suppression confirmée <br>";
-
 	}
 	}else {
  			echo "Database not found <br>";
 		}
 	mysqli_close($db_handle);
 ?><br>
-	  Retour à l'<a href="accueiladmin.html">accueil</a>
+Retour à l'<a href="accueiladmin.html">accueil</a>
 <div id="footer">Copyright &copy; ECE MarketPlace 2021<br>
       <p>Vous pouvez-nous contacter :
       <ul>
