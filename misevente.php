@@ -28,10 +28,6 @@
     .tablo{
     	text-align: center;
     }
-    .image{
-    	height: 100%;
-    	width: 100%;
-    }
   </style>
 </head>
 <body>
@@ -76,7 +72,7 @@
 	session_start();
 
 	//identifier le nom de base de données
-	echo "<meta charset="utf-8">";
+	echo "<meta charset=\"utf-8\">";
 	$id=$_SESSION['sessionID'];
 	$database = "ecemarketplace";
 	//connectez-vous dans votre BDD
@@ -194,7 +190,7 @@
 			while ($data = mysqli_fetch_assoc($result)){
 				$img = $data['image'];
 				echo "<tr>";
-				echo "<td>"."<div class="image"><img src='$img'>"."</td></div>";
+				echo "<td>"."<img src='$img' height='120' width='100'>"."</td>";
 				echo "</tr>";
 			}
 	}//end if
