@@ -10,6 +10,7 @@
 	$db_handle = mysqli_connect('localhost', 'root', '' );
 	$db_found = mysqli_select_db($db_handle, $database);
 	$numcarteint = intval($numcarte, 10);
+	$IDacheteurs;
 	if ($db_found) {
 		$sql="SELECT Mail FROM acheteurs";
 		$result = mysqli_query($db_handle, $sql);
@@ -22,6 +23,14 @@
 		} 
 		if ($binaire==1) {
 			$sql="INSERT INTO acheteurs(Nom,Prenom,Adresse,Mail,Motdepasse,Numcarte) VALUES ('$nom','$prenom','$adresse','$mail','$motdepasse','$numcarte')";
+			$result = mysqli_query($db_handle, $sql);
+			$sql="SELECT ID FROM acheteurs WHERE Mail = '$mail'";
+			$result = mysqli_query($db_handle, $sql);
+			var_dump($result);
+			while ($data = mysqli_fetch_assoc($result)){
+				$IDacheteurs = $data['ID'];
+			}
+			$sql="INSERT INTO notifications(Ouinon,IDacheteurs,IDdernierobjet) VALUES('non',$IDacheteurs,1)";
 			$result = mysqli_query($db_handle, $sql);
 			echo "Inscription confirmée.<br>";
 		} else{
