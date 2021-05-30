@@ -118,7 +118,6 @@
 	$categorievente= isset($_POST["categorievente"])? $_POST["categorievente"] : "";
 	$categorieobjet= isset($_POST["categorieobjet"])? $_POST["categorieobjet"] : "";
 	$image = isset($_POST["image"])? $_POST["image"] : "";
-
 	 //si le BDD existe, faire le traitement
 	if ($db_found) {
 		/*var_dump($_FILES['fic']);
@@ -139,10 +138,8 @@
 			
 		}else{
 			//on ajoute l'article dans la BDD
-			$sql = "INSERT INTO objets(IDvendeur, Nom, Prix, Defauts, Qualites, Typevente, Categorie,IDvendu) VALUES($id,'$nom', $prix ,'$defauts','$qualites','$categorievente','$categorieobjet',0)";
+			$sql = "INSERT INTO objets(IDvendeur, Nom, Prix, Defauts, Qualites, Typevente, Categorie) VALUES($id,'$nom', $prix ,'$defauts','$qualites','$categorievente','$categorieobjet')";
 			$result = mysqli_query($db_handle,$sql);
-
-			
 			echo "Ajout confirmé <br>";
 			//on affiche l'objet ajouté
 			$sql = "SELECT * FROM objets WHERE Nom LIKE '%$nom'";
@@ -194,11 +191,6 @@
 				echo "<tr>";
 				echo "<td>"."<img src='$img' height='15%' width='15%'>"."</td>";
 				echo "</tr>";
-			}
-			if ($categorievente=='enchere'){
-				$date = isset($_POST["date"])? $_POST["date"] : "";
-				$sql= "INSERT INTO encheres(Prix1,Prix2,Datedevente,IDvendu,IDobjets) VALUES($prix,$prix,'$date',0,$ID)";
-				$result = mysqli_query($db_handle,$sql);
 			}
 		}
 	}//end if
