@@ -44,7 +44,7 @@
 	$db_handle = mysqli_connect('localhost', 'root', '' );
 	$db_found = mysqli_select_db($db_handle, $database);
 	if ($db_found) {
-		$sql = "INSERT INTO vendeurs(Nom,Prenom,Mail,Motdepasse) VALUES('$nom','$prenom','$mail','$motdepasse')";
+		$sql = "INSERT INTO vendeurs(Nom,Prenom,Mail,Motdepasse,admin) VALUES('$nom','$prenom','$mail','$motdepasse','0')";
 		$result = mysqli_query($db_handle,$sql);
     echo "Ajout confirmé <br>";
 
