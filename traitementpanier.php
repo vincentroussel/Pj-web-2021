@@ -19,7 +19,7 @@
 		}
 		$length=count($interpanier);
 		for ($i=0;$i<$length;$i++){
-			$IDobjet = intval($interpanier[$i]);
+			$IDobjet = intval($interpanier[$i]['IDobjets']);
 			$sql="SELECT * FROM objets WHERE ID=$IDobjet AND IDvendu = 0";
 			$result = mysqli_query($db_handle, $sql);
 			while ($data = mysqli_fetch_assoc($result)) {
@@ -35,9 +35,9 @@
 		//	array_push($interpanier, $data);
 			//var_dump($data);
 		//}
-		$length2=count($interobjet);
+		$length2=count($interobjets);
 		for($i=0;$i<$length2;$i++){
-			if($interobjet[$i]['Categorie']=='enchere'){
+			if($interobjets[$i]['Categorie']=='enchere'){
 				$sql="SELECT ID from encheres WHERE IDobjets=$interobjet[$i]['ID']";
 				$result = mysqli_query($db_handle, $sql);
 				while ($data = mysqli_fetch_assoc($result)) {
@@ -45,7 +45,7 @@
 					//var_dump($data);
 				}
 			}
-			if($interobjet[$i]['Categorie']=='nego'){
+			if($interobjets[$i]['Categorie']=='nego'){
 				$sql="SELECT ID FROM negociation WHERE  IDobjets=$interobjet[$i]['ID'] AND IDvendeur= $ID";
 				$result = mysqli_query($db_handle, $sql);
 				while ($data = mysqli_fetch_assoc($result)) {
@@ -53,7 +53,7 @@
 					//var_dump($data);
 				}
 			}
-			if($interobjet[$i]['Categorie']=='vente'){
+			if($interobjets[$i]['Categorie']=='vente'){
 				array_push($interpanier, 0);
 			}
 		}
