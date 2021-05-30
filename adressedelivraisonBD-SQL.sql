@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `adressedelivraison`;
 CREATE TABLE IF NOT EXISTS `adressedelivraison` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `ID` int(11) NOT NULL,
   `Adresse1` varchar(255) NOT NULL,
   `Adresse2` varchar(255),
   `Ville` varchar(255) ,
@@ -38,4 +38,4 @@ CREATE TABLE IF NOT EXISTS `adressedelivraison` (
   `Pays` varchar(255) ,
   `Telephone` int(55) ,
   CONSTRAINT Adresse PRIMARY KEY (ID,Adresse2)
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) /*ENGINE=MyISAM AUTO_INCREMENT=1*/ DEFAULT CHARSET=latin1;
