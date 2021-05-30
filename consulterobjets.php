@@ -74,6 +74,8 @@
     </form>
      <div>
       <?php
+        if ($_SESSION['passe'] ==1) {
+        $_SESSION['passe']=0;
         $length=count($_SESSION['listeobjetsvendeur']);
         $listeobjet  = $_SESSION['listeobjetsvendeur'];
         $listeIDpanier=$_SESSION['listeIDpanier'];
@@ -98,13 +100,24 @@
         <?php
         echo($listeobjet[$i]['Qualites']);?>
       </td>
-      <td> Ville:
-        <?php
-        echo($listeobjet[$i]['Ville']);?>
-      </td>
       <td> Photo:
         <?php
-        echo($listeobjet[$i]['Photos']);?>
+        $database = "ecemarketplace";
+        $db_handle = mysqli_connect('localhost', 'root', '' );
+        $db_found = mysqli_select_db($db_handle, $database);
+        if ($db_found){
+          $IDphotos = intval($listeobjet[$i]['IDimages']);
+          $ID = intval($listeobjet[$i]['ID']);
+          $sql = "SELECT * FROM images WHERE IDphotos = $IDphotos";
+          $result = mysqli_query($db_handle, $sql);
+          while ($data = mysqli_fetch_assoc($result)) {
+            $img = $data['image'];
+            echo "<tr>";
+            echo "<td>"."<img src='$img' height='10%' width='10%'>"."</td>";
+            echo "</tr>";
+          }
+        }
+        ?>
       </td>
       <td> Type de vente:
         <?php
@@ -116,8 +129,8 @@
       </td>
     </tr>
     <form action="suppressionobjetsvendeur.php" method="POST">
-    	<input type="hidden" name="IDobjet" value="<?php echo"$listeobjet[$i]['ID']"; ?> ">
-    	<tr>
+      <input type="hidden" name="IDobjet" value="<?php echo $ID; ?> ">
+      <tr>
             <td colspan="2" align="center">
                 <input type="submit" value="supprimer cet objet" >
             </td>
@@ -157,7 +170,8 @@
 
     <?php
       }
-    ?>
+        }?>
+        
 
     <div id="footer">Copyright &copy; ECE MarketPlace 2021<br>
        <p>Vous pouvez-nous contacter :
