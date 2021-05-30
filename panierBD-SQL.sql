@@ -30,8 +30,8 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `panier`;
 CREATE TABLE IF NOT EXISTS `panier` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `IDobjets` int(11) ,
-  `IDacheteurs` int(11) ,
-  PRIMARY KEY (`ID`)
+  `numero` int(11) NOT NULL AUTO_INCREMENT,
+  `ID` int(11) NOT NULL,
+  `IDobjets` int(11) NOT NULL,
+  PRIMARY KEY (`numero`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;

@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `encheres` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `Prix1` int(50),
   `Prix2` int(50),
-  `Datedevente` datetime,
+  `Datedevente` varchar(255),
   `IDvendu` int(11),
   `IDobjets` int(11),
   `IDoffres` int(11),
