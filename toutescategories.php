@@ -1,6 +1,7 @@
 <?php
 	session_start();
 	$_SESSION['test']=2;
+	$_SESSION['passe']=1;
 	$inter = array();
 	$typeobjet = isset($_POST["typeobjet"])? $_POST["typeobjet"] : "";
 	$database = "ecemarketplace";

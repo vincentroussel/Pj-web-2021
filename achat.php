@@ -103,6 +103,8 @@
     </form>
     <div>
       <?php
+      if ($_SESSION['passe']==1){
+        $_SESSION['passe']=0;
         $length=count($_SESSION['listeobjets']);
         //var_dump($_SESSION['listeobjets']);
         //echo "length";
@@ -146,6 +148,15 @@
         echo($listeobjet[$i]['Categorie']);?>
       </td>
     </tr>
+    <form action="ajoutpanier.php" method="POST">
+      <tr>
+        <td colspan="2" align="center">
+          <input type="hidden" name="IDobjet" value="<?php echo"$listeobjet[$i]['ID']"; ?> ">
+          <input type="hidden" name="typevente" value="<?php echo"$listeobjet[$i]['Typevente']"; ?> ">
+          <input type="submit" value="Ajouter au panier" >
+        </td>
+      </tr>
+    </form>
     <?php
       }
     ?>
