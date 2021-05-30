@@ -50,9 +50,8 @@
           <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-expand">
                 <li><a href="pagevendeur.html">Accueil</a></li>
-                <li><a href="#">Evaluer mon bien</a></li>
                 <li  class="active"><a href="misevente.html">Vendre un bien</a></li>
-                <li><a href="espacevente.html">Mon espace de vente</a></li>
+                <li><a href="consulterobjets.php">Mon espace de vente</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right navbar-expand">
                 <li class="nav-item dropdown">
