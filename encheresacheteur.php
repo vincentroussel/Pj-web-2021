@@ -1,8 +1,69 @@
-<?php session_start(); ?>
+<?php
+	session_start();
+	date_default_timezone_set('France/Paris');
+	$enchereproposee = isset($_POST["enchereproposee"])? $_POST["enchereproposee"] : "";
+
+	$database = "ecemarketplace";
+	$db_handle = mysqli_connect('localhost', 'root', '' );
+	$db_found = mysqli_select_db($db_handle, $database);
+	if ($db_found) {
+		$date = date('m/d/Y h:i:s a', time());
+		$sql="SELECT Datevente FROM encheres WHERE 'IDobjets'=$_SESSION['IDobjet']";
+		$result = mysqli_query($db_handle, $sql);
+		while ($data = mysqli_fetch_assoc($result)) {
+			$datefin=$data;
+		}
+		if ($date>$datefin){
+			//on arrete tout
+			$sql="SELECT IDacheteurs, Prix2 FROM encheres WHERE 'IDobjets'=$_SESSION['IDobjet']";
+			$result = mysqli_query($db_handle, $sql);
+			while ($data = mysqli_fetch_assoc($result)) {
+				$check=$data['IDacheteur'];
+				$prixpaye=$data['Prix2'];
+			}
+			$prixpaye=$prixpaye+1;
+			if($check==$_SESSION('sessionID')){
+
+				$message='enchere terminee. Vous avez gagne. Vous avez achete votre objet a '.$prixpaye.' euros';
+			}
+			else{
+				$message='enchere terminee. vous avez perdu';
+				// faudrait envoyer un mail au gars qui a gagné pour lui dire qu'il a gagné
+			}
+			$sql="UPDATE IDvendu FROM encheres SET'1' WHERE 'IDobjets'=$_SESSION['IDobjet']";
+		}
+		else{
+			$sql="SELECT Prix1,Prix2 FROM encheres WHERE 'IDobjets'=$_SESSION['IDobjet']";
+			$result = mysqli_query($db_handle, $sql);
+			while ($data = mysqli_fetch_assoc($result)) {
+				$prix1=$data['Prix1'];
+				$prix2=$data['Prix2'];
+			}
+			if ($enchereproposee>$Prix1){
+				$sql="UPDATE Prix2 FROM encheres SET'$prix1' WHERE 'IDobjets'=$_SESSION['IDobjet']";
+				$result = mysqli_query($db_handle, $sql);
+				$sql="UPDATE Prix1 FROM encheres SET'$enchereproposee' WHERE 'IDobjets'=$_SESSION['IDobjet']";
+				$result = mysqli_query($db_handle, $sql);
+				$sql="UPDATE IDacheteurs FROM encheres SET'$_SESSION['sessionID']' WHERE 'IDobjets'=$_SESSION['IDobjet']";
+				$result = mysqli_query($db_handle, $sql);
+			}
+			else{
+				if ($enchereproposee>$Prix1){
+					$sql="UPDATE Prix2 FROM encheres SET'$enchereproposee' WHERE 'IDobjets'=$_SESSION['IDobjet']";
+					$result = mysqli_query($db_handle, $sql);
+				}
+			}
+			$message='Votre enchère a bien étée prise en compte';
+		}
+	}else {
+ 			echo "Database not found";
+		}
+	mysqli_close($db_handle);
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-	<title>Panier</title>
+	<title>enchere acheteur</title>
 	<meta charset="utf-8">
 	<meta name= "viewport" content= "width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -29,14 +90,13 @@
     </style>
 </head>
 <body>
-    <div class="container-fluid">
+	<div class="container-fluid">
         <div class="row; text-white bg-info">
-            <h1 class="text-center">Bienvenue sur votre panier ECE MarketPlace <img src="ecemarketplace.jpg"></h1>
+            <h1 class="text-center">Bienvenue sur la page d'enchères acheteur de l'ECE MarketPlace <img src="ecemarketplace.jpg"></h1>
         </div>
         <div class="row; text-white bg-info">
             <p>L'ECE MarketPlace est un site de vente en ligne pour la communauté ECE.<br> Vendez ou bien achetez, des produits de bonne qualité en utilisant nos diverses méthodes : négociation, vente aux enchères ou tout simplement en achat/vente instantané(e).<br> ECE MarketPlace, la plateforme de vente où tout devient possible.</p>
         </div>
-
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -57,11 +117,12 @@
                                 <a class="dropdown-item" href="transactionacheteurvendeur.html">Transaction Acheteur/Vendeur</a>
                             </div>
                         </li>
-                        <li><a href="notifications.html">Notifications</a></li>
+                        <li><a href="notifications.php">Notifications</a></li>
                         
                     </ul>
                     <ul class="nav navbar-nav navbar-right navbar-expand">
-                        <li class="active"><a href="panier.html"><span class="glyphicon glyphicon-log-in"></span> Panier <img src="panier.jpg" width="20" height="20"></a></li>
+                        <li class="active"><a href="encheres.html">Enchères</a></li>
+                        <li><a href="panier.php"><span class="glyphicon glyphicon-log-in"></span> Panier <img src="panier.jpg" width="20" height="20"></a></li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="votrecompte.html" id="navbarDropdownMenuLink" data-toggle="dropdown"aria-haspopup="true"aria-expanded="false">Votre Compte</a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -73,91 +134,12 @@
                 </div>
             </div>
         </nav>
-    </div>
-    <form action="traitementpanier.php">
-        <tr>
-                <td colspan="2" align="center">
-                   <input type="submit" value="Afficher mon panier" >
-                </td>
-            </tr>
-    </form>
-    <div>
-      <?php
-        $length=count($_SESSION['listeobjetspanier']);
-        $listeobjet  = $_SESSION['listeobjetspanier'];
-        $listeIDpanier=$_SESSION['listeIDpanier'];
-        for($i=0;$i< $length;$i++){
-        ?>
-    </div>
-        
-    <tr>
-      <td> Nom de l'objet:
-        <?php
-        echo($listeobjet[$i]['Nom']);?>
-      </td>
-      <td> Prix:
-        <?php
-        echo($listeobjet[$i]['Prix']);?>
-      </td>
-      <td> Defauts:
-        <?php
-        echo($listeobjet[$i]['Defauts']);?>
-      </td>
-      <td> Qualites:
-        <?php
-        echo($listeobjet[$i]['Qualites']);?>
-      </td>
-      <td> Ville:
-        <?php
-        echo($listeobjet[$i]['Ville']);?>
-      </td>
-      <td> Photo:
-        <?php
-        echo($listeobjet[$i]['Photos']);?>
-      </td>
-      <td> Type de vente:
-        <?php
-        echo($listeobjet[$i]['Typevente']);?>
-      </td>
-      <td> Categorie de l'objet:
-        <?php
-        echo($listeobjet[$i]['Categorie']);?>
-      </td>
-    </tr>
-    <?php 
-        if ($listeobjet[$i]['Typevente']=='enchere'){
-    ?>
-    <form action="traitementpanierenchere.php" method="POST">
-        <input type="hidden" name="IDobjet" value="<?php echo"$listeobjet[$i]['ID']"; ?> ">
-        <input type="hidden" name="IDenchere" value="<?php echo"$listeIDpanier[$i]"; ?> ">
-        <tr>
-            <td colspan="2" align="center">
-                <input type="submit" value="encherir sur cet objet" >
-            </td>
-        </tr>
-    </form>
-    <?php
-        }
-    if ($listeobjet[$i]['Typevente']=='nego'){
-    ?>
-    <form action="traitementpaniernego.php" method="POST">
-        <input type="hidden" name="IDobjet" value="<?php echo"$listeobjet[$i]['ID']"; ?> ">
-        <input type="hidden" name="IDnego" value="<?php echo"$listeIDpanier[$i]"; ?> ">
-        <tr>
-            <td colspan="2" align="center">
-                <input type="submit" value="negocier sur cet objet" >
-            </td>
-        </tr>
-    </form>
-    <?php
-        }
-      }
-    ?>
-    <li><a href="paiement.html">Cliquez ici pour payer vos articles en achat immédiat</a></li>
-    <br>
-    <br>
-    <br>
-    <div id="footer">Copyright &copy; ECE MarketPlace 2021<br>
+        <br>
+        <br>
+        <?php echo"$message"; ?>
+        <br>
+        <br>
+        <div id="footer">Copyright &copy; ECE MarketPlace 2021<br>
             <p>Vous pouvez-nous contacter :
             <ul>
                 <li>Par téléphone au <em>(+33) 07 60 52 04 07</em></li>
@@ -165,6 +147,7 @@
                 <li>ou rendez-vous chez nous au <address>37 Quai de Grenelle, 75015 Paris</address></li>
             </ul>
             </p>
-    </div>
+        </div>
+
 </body>
 </html>
