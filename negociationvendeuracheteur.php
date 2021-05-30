@@ -1,81 +1,27 @@
-<?php
-    session_start();
-    $votreoffre = isset($_POST["votreoffre"])? $_POST["votreoffre"] : "";
-    $database = "ecemarketplace";
-    //connectez-vous dans votre BDD
-    //Rappel : votre serveur = localhost | votre login = root | votre mot de pass = '' (rien)
-    $db_handle = mysqli_connect('localhost', 'root', '' );
-    $db_found = mysqli_select_db($db_handle, $database);
-    //si le BDD existe, faire le traitement
-    if ($db_found) {
-        $sql="UPDATE prixvendeur FROM negociation SET '$votreoffre' WHERE 'ID'=$_SESSION['IDnego']";
-        $result = mysqli_query($db_handle, $sql);
-        $sql="SELECT prixacheteur FROM negociation WHERE 'ID'=$_SESSION['IDnego']";
-        $result = mysqli_query($db_handle, $sql);
-        while ($data = mysqli_fetch_assoc($result)) {
-            $offreacheteur=$data;
-        }
-        if ($offreacheteur==$votreoffre){
-            $sql="UPDATE IDvendu FROM objets SET '1' WHERE 'ID'=$_SESSION['IDobjet']";
-            $result = mysqli_query($db_handle, $sql);
-            //envoi vers un message de confirmation
-            $message='La negociation est terminee, vous avez vendu cet arcticle';
-        }
-        else{
-            $sql="SELECT nbetapes FROM negociation WHERE 'ID'=$_SESSION['IDobjet']";
-            $result = mysqli_query($db_handle, $sql);
-            while ($data = mysqli_fetch_assoc($result)) {
-                $inter=$data;
-            }
-            if($inter==10){
-                $sql="SELECT IDacheteur FROM negociation WHERE 'ID'=$_SESSION['IDnego']";
-                $result = mysqli_query($db_handle, $sql);
-                while ($data = mysqli_fetch_assoc($result)) {
-                    $IDacheteur=$data;
-                }
-                $sql="DELETE FROM panier WHERE 'IDacheteurs'=$IDacheteur AND 'IDobjets'=$_SESSION['IDobjet']";
-                $result = mysqli_query($db_handle, $sql);
-                //renvoi vers un message informant que la négo est finie
-                $message='La negociation est terminee, vous avez dépassé le nombre max de negociations';
-            }
-            else{
-                $inter=$inter+1;
-                $sql="UPDATE nbetapes FROM negociation SET '$inter' WHERE 'ID'=$_SESSION['IDnego']";
-                $result = mysqli_query($db_handle, $sql);
-                //renvoi vers une page disant que la negociation continue
-                $message='La negociation continue';
-            }
-        }
-    }
-    else {
-        echo "Database not found";
-    }//end else
-    //fermer la connection
-    mysqli_close($db_handle);
-?>
+<?php session_start()?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>negociation</title>
-    <meta charset="utf-8">
-    <meta name= "viewport" content= "width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	<title>Bienvenue sur la page négociations vendeur/acheteur de l'ECE MarketPlace</title>
+	<meta charset="utf-8">
+	<meta name= "viewport" content= "width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel= "stylesheet"href= "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	<link rel= "stylesheet"href= "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-    <script src= "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.j s"> </script>
-    <script src= "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/j s/bootstrap.min.j s"> </script>
-    <style type="text/css">
-        .navbar {
-             margin-bottom: 0;
-             border-radius: 0;
-        }
+ 	<script src= "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.j s"> </script>
+ 	<script src= "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/j s/bootstrap.min.j s"> </script>
+ 	<style type="text/css">
+ 		.navbar {
+     		 margin-bottom: 0;
+     		 border-radius: 0;
+    	}
         #footer{
             background-color: #17A2B8;
             color: white;
@@ -83,7 +29,7 @@
     </style>
 </head>
 <body>
-    <div class="container-fluid">
+<div class="container-fluid">
         <div class="row; text-white bg-info">
             <h1 class="text-center">Bienvenue sur la page des négociations vendeur/acheteur de l'ECE MarketPlace <img src="ecemarketplace.jpg"></h1>
         </div>
@@ -101,7 +47,7 @@
           </div>
           <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-expand">
-                <li class="active"><a href="pagevendeur.html">Accueil</a></li>
+                <li><a href="pagevendeur.html">Accueil</a></li>
                 <li><a href="misevente.html">Vendre un bien</a></li>
                 <li><a href="consulterobjets.php">Mon espace de vente</a></li>
             </ul>
@@ -118,7 +64,35 @@
           </div>
         </div>
     </nav>
-    <?php echo"message" ?>
+        <h2>Négociations en cours</h2>
+    <form action="affichernegovendeuracheteur.php" method="POST">
+            <tr>
+                <td><input type="number" name="consulter cette negociation"></td>
+            </tr>
+    </form><br>
+    <table>
+            <tr>
+                <td>Votre dernière offre</td>
+                <td><?php echo "$_SESSION['prixvendeur']"?> euros;</td>
+            </tr>
+            <tr>
+                <td>Dernière offre de l'acheteur</td>
+                <td><?php echo "$_SESSION['prixacheteur']"?> euros;</td>
+            </tr>
+        </table>
+    <form action="traitementnegociationvendeuracheteur.php" method="POST">
+        <table>
+            <tr>
+                <td>Votre offre:</td>
+                <td><input type="number" name="votreoffre"></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                <input type="submit" value="Négocier" >
+            </td>
+            </tr>
+        </table>
+    </form><br>
         <div id="footer">Copyright &copy; ECE MarketPlace 2021<br>
             <p>Vous pouvez-nous contacter :
             <ul>
