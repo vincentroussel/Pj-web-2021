@@ -89,9 +89,10 @@
             <ul class="nav navbar-nav navbar-expand">
                 <li><a href="pagevendeur.html">Accueil</a></li>
                 <li><a href="misevente.html">Vendre un bien</a></li>
-                <li class="active"><a href="consulterobjets.php">Mon espace de vente</a></li>
+                <li><a href="consulterobjets.php">Mon espace de vente</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right navbar-expand">
+		<li class="active"><a href="encherevendeur.php">Enchères</a></li>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="votrecompte.html" id="navbarDropdownMenuLink" data-toggle="dropdown"aria-haspopup="true"aria-expanded="false">Votre Compte</a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
