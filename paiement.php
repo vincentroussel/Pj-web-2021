@@ -41,7 +41,7 @@
 	$nom = isset($_POST["nom"])? $_POST["nom"] : "";
 	$prenom = isset($_POST["prenom"])? $_POST["prenom"] : "";
 	$adresse1 = isset($_POST["adresse1"])? $_POST["adresse1"] : "";
-	$adresse1 = isset($_POST["adresse2"])? $_POST["adresse2"] : "";
+	$adresse2 = isset($_POST["adresse2"])? $_POST["adresse2"] : "";
 	$ville = isset($_POST["ville"])? $_POST["ville"] : "";
 	$postale = isset($_POST["postale"])? $_POST["postale"] : "";
 	$pays = isset($_POST["pays"])? $_POST["pays"] : "";
@@ -51,47 +51,61 @@
 	$nomcarte = isset($_POST["nomcarte"])? $_POST["nomcarte"] : "";
 	$date = isset($_POST["Date"])? $_POST["Date"] : "";
 	$cryptogramme = isset($_POST["cryptogramme"])? $_POST["cryptogramme"] : "";
-	$verifadresse=0;
+	$cryptogramme = intval($cryptogramme);
+	$verifadresse=1;
 	$verifcarte=0;
+	$ID = $_SESSION['sessionID'];
 
 	$database = "ecemarketplace";
 	$db_handle = mysqli_connect('localhost', 'root', '' );
 	$db_found = mysqli_select_db($db_handle, $database);
 	if ($db_found) {
-		$sql= "SELECT * FROM adressedelivraison WHERE 'IDacheteurs'=$_SESSION['sessionID']";
+		$sql= "SELECT * FROM adressedelivraison WHERE ID=$ID";
 		$result = mysqli_query($db_handle,$sql);
 		while ($data = mysqli_fetch_assoc($result)){
-			if (($data['Nom'] == $nom) && ($data['Prenom'] == $prenom)&& ($data['Adresse1'] == $adresse1)&& ($data['Adresse2'] == $adresse2)&& ($data['Ville'] == $ville)&& ($data['Postale'] == $postale)&& ($data['Pays'] == $pays)&& ($data['Telephone'] == $telephone)) {
-				$verifadresse = 1;
+			if (($data['Adresse1'] == $adresse1)&& ($data['Adresse2'] == $adresse2)&& ($data['Ville'] == $ville)&& ($data['Postal'] == $postale)&& ($data['Pays'] == $pays)&& ($data['Telephone'] == $telephone)) {
+				$verifadresse = 0;
 			}
 		}
+		if ($verifadresse == 1) {
+			$postale = intval($postale);
+
+			
+			$telephone = intval($telephone);
+
+			$sql = "INSERT INTO adressedelivraison(ID, Adresse1, Adresse2, Ville, Postal, Pays, Telephone) VALUES ($ID, '$adresse1', '$adresse2', '$ville', $postale, '$pays', $telephone)";
+			$result = mysqli_query($db_handle,$sql);
+		}
 		$verif=0;
-		$sql="SELECT * FROM infobancaire WHERE 'Numcarte'='$numcarte'";
+		$sql="SELECT * FROM infobancaire WHERE Numcarte=$numcarte";
 		$result = mysqli_query($db_handle,$sql);
 		while ($data = mysqli_fetch_assoc($result)){
-			if(($data['Typecarte'] == $creditCard) &&($data['Nom'] == $nomcarte) && ($data['Date'] == $date)&& ($data['Cryptogramme'] == $cryptogramme)){
+			$datacryptogramme = intval($data['Cryptogramme']);
+			if(($data['Typecarte'] == $creditCard) &&($data['Nom'] == $nomcarte) && ($data['Dateexpiration'] == $date)&& ($datacryptogramme == $cryptogramme)){
 				$verifcarte=1;
 			}
 		}
-		if ($verifadresse==0){
-			echo("ce n'est pas la bonne adresse <br>");
-		}
+		//if ($verifadresse== 1){
+		//	echo("ce n'est pas la bonne adresse <br>");
+		//}
 		if ($verifcarte==0){
 			echo("ce n'est pas la bonne carte <br>");
 		}
-		if (($verifadresse==1)&&($verifcarte==1)){
-			$sql="SELECT IDobjets FROM panier WHERE 'IDacheteurs'=$_SESSION['sessionID'] ";
+		if ($verifcarte==1){
+			$sql="SELECT IDobjets FROM panier WHERE ID=$ID ";
 			$result = mysqli_query($db_handle,$sql);
 			while ($data = mysqli_fetch_assoc($result)){
 				array_push($inter, $data);
 			}
-			$lenghth=count($inter);
+			$length=count($inter);
 			for ($i=0;$i<$length;$i++){
-				$sql="UPDATE IDvendu FROM objets SET '1' WHERE 'ID'=$inter[$i]";
+				$idvendu = intval($inter[$i]);
+				$sql="UPDATE objets SET IDvendu = 1 WHERE ID=$idvendu";
 				$result = mysqli_query($db_handle,$sql);
 				echo "Paiement confirmé <br>";
 			}
 	}
+}
 ?><br>
 <div id="footer">Copyright &copy; ECE MarketPlace 2021<br>
             <p>Vous pouvez-nous contacter :
