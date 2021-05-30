@@ -55,7 +55,7 @@
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="votrecompte.html" id="navbarDropdownMenuLink" data-toggle="dropdown"aria-haspopup="true"aria-expanded="false">Votre Compte</a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="profilvendeur.html">Mon Profil</a>
+                    <a class="dropdown-item" href="active profilvendeur.php">Mon Profil</a>
                     <a class="dropdown-item" href="votrecompte.html">Déconnexion</a>
                   </div>
                 </li>
