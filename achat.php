@@ -131,13 +131,25 @@
         <?php
         echo($listeobjet[$i]['Qualites']);?>
       </td>
-      <td> Ville:
-        <?php
-        echo($listeobjet[$i]['Ville']);?>
-      </td>
       <td> Photo:
         <?php
-        echo($listeobjet[$i]['Photos']);?>
+        $database = "ecemarketplace";
+        $db_handle = mysqli_connect('localhost', 'root', '' );
+        $db_found = mysqli_select_db($db_handle, $database);
+        if ($db_found){
+          $IDphotos = intval($listeobjet[$i]['IDimages']);
+          $ID = intval($listeobjet[$i]['ID']);
+          $typevente = $listeobjet[$i]['Typevente'];
+          $sql = "SELECT * FROM images WHERE IDphotos = $IDphotos";
+          $result = mysqli_query($db_handle, $sql);
+          while ($data = mysqli_fetch_assoc($result)) {
+            $img = $data['image'];
+            echo "<tr>";
+            echo "<td>"."<img src='$img' height='10%' width='10%'>"."</td>";
+            echo "</tr>";
+          }
+        }
+        ?>
       </td>
       <td> Type de vente:
         <?php
@@ -148,11 +160,11 @@
         echo($listeobjet[$i]['Categorie']);?>
       </td>
     </tr>
-    <form action="ajoutpanier.php" method="POST">
+    <form action="ajouterpanier.php" method="POST">
       <tr>
         <td colspan="2" align="center">
-          <input type="hidden" name="IDobjet" value="<?php echo"$listeobjet[$i]['ID']"; ?> ">
-          <input type="hidden" name="typevente" value="<?php echo"$listeobjet[$i]['Typevente']"; ?> ">
+          <input type="hidden" name="IDobjet" value="<?php echo $ID; ?> ">
+          <input type="hidden" name="typevente" value="<?php echo $typevente; ?> ">
           <input type="submit" value="Ajouter au panier" >
         </td>
       </tr>
