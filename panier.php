@@ -2,26 +2,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Panier</title>
-	<meta charset="utf-8">
-	<meta name= "viewport" content= "width=device-width, initial-scale=1">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+  <title>Panier</title>
+  <meta charset="utf-8">
+  <meta name= "viewport" content= "width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<link rel= "stylesheet"href= "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+  <link rel= "stylesheet"href= "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
- 	<script src= "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.j s"> </script>
- 	<script src= "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/j s/bootstrap.min.j s"> </script>
- 	<style type="text/css">
- 		.navbar {
-     		 margin-bottom: 0;
-     		 border-radius: 0;
-    	}
+  <script src= "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.j s"> </script>
+  <script src= "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/j s/bootstrap.min.j s"> </script>
+  <style type="text/css">
+    .navbar {
+         margin-bottom: 0;
+         border-radius: 0;
+      }
         #footer{
             background-color: #17A2B8;
             color: white;
@@ -57,15 +57,15 @@
                                 <a class="dropdown-item" href="transactionacheteurvendeur.html">Transaction Acheteur/Vendeur</a>
                             </div>
                         </li>
-                        <li><a href="notifications.html">Notifications</a></li>
+                        <li><a href="notifications.php">Notifications</a></li>
                         
                     </ul>
                     <ul class="nav navbar-nav navbar-right navbar-expand">
-                        <li class="active"><a href="panier.html"><span class="glyphicon glyphicon-log-in"></span> Panier <img src="panier.jpg" width="20" height="20"></a></li>
+                        <li class="active"><a href="panier.php"><span class="glyphicon glyphicon-log-in"></span> Panier <img src="panier.jpg" width="20" height="20"></a></li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="votrecompte.html" id="navbarDropdownMenuLink" data-toggle="dropdown"aria-haspopup="true"aria-expanded="false">Votre Compte</a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="monprofil.php">Mon Profil</a>
+                                <a class="dropdown-item" href="monprofil.html">Mon Profil</a>
                                 <a class="dropdown-item" href="votrecompte.html">Déconnexion</a>
                             </div>
                         </li>
@@ -83,9 +83,10 @@
     </form>
     <div>
       <?php
+      if ($_SESSION['passe']==1) {
+        $_SESSION['passe']=0;
         $length=count($_SESSION['listeobjetspanier']);
         $listeobjet  = $_SESSION['listeobjetspanier'];
-        $listeIDpanier=$_SESSION['listeIDpanier'];
         for($i=0;$i< $length;$i++){
         ?>
     </div>
@@ -107,13 +108,25 @@
         <?php
         echo($listeobjet[$i]['Qualites']);?>
       </td>
-      <td> Ville:
-        <?php
-        echo($listeobjet[$i]['Ville']);?>
-      </td>
       <td> Photo:
         <?php
-        echo($listeobjet[$i]['Photos']);?>
+        $database = "ecemarketplace";
+        $db_handle = mysqli_connect('localhost', 'root', '' );
+        $db_found = mysqli_select_db($db_handle, $database);
+        if ($db_found){
+          $IDphotos = intval($listeobjet[$i]['IDimages']);
+          $ID = intval($listeobjet[$i]['ID']);
+          $typevente = $listeobjet[$i]['Typevente'];
+          $sql = "SELECT * FROM images WHERE IDphotos = $IDphotos";
+          $result = mysqli_query($db_handle, $sql);
+          while ($data = mysqli_fetch_assoc($result)) {
+            $img = $data['image'];
+            echo "<tr>";
+            echo "<td>"."<img src='$img' height='10%' width='10%'>"."</td>";
+            echo "</tr>";
+          }
+        }
+        ?>
       </td>
       <td> Type de vente:
         <?php
@@ -123,13 +136,16 @@
         <?php
         echo($listeobjet[$i]['Categorie']);?>
       </td>
+      <td> Image:
+        <?php
+        echo($listeobjet[$i]['Categorie']);?>
+      </td>
     </tr>
     <?php 
         if ($listeobjet[$i]['Typevente']=='enchere'){
     ?>
     <form action="traitementpanierenchere.php" method="POST">
-        <input type="hidden" name="IDobjet" value="<?php echo"$listeobjet[$i]['ID']"; ?> ">
-        <input type="hidden" name="IDenchere" value="<?php echo"$listeIDpanier[$i]"; ?> ">
+        <input type="hidden" name="IDobjet" value="<?php echo($listeobjet[$i]['ID']); ?> ">
         <tr>
             <td colspan="2" align="center">
                 <input type="submit" value="encherir sur cet objet" >
@@ -141,8 +157,7 @@
     if ($listeobjet[$i]['Typevente']=='nego'){
     ?>
     <form action="traitementpaniernego.php" method="POST">
-        <input type="hidden" name="IDobjet" value="<?php echo"$listeobjet[$i]['ID']"; ?> ">
-        <input type="hidden" name="IDnego" value="<?php echo"$listeIDpanier[$i]"; ?> ">
+        <input type="hidden" name="IDobjet" value="<?php echo($listeobjet[$i]['ID']); ?> ">
         <tr>
             <td colspan="2" align="center">
                 <input type="submit" value="negocier sur cet objet" >
@@ -152,11 +167,15 @@
     <?php
         }
       }
+    }
     ?>
-    <li><a href="paiement.html">Cliquez ici pour payer vos articles en achat immédiat</a></li>
-    <br>
-    <br>
-    <br>
+    <form action="paiement.html" method="POST">
+        <tr>
+            <td colspan="2" align="center">
+                <input type="submit" value="payer les achats immediats de mon panier" >
+            </td>
+        </tr>
+    </form>
     <div id="footer">Copyright &copy; ECE MarketPlace 2021<br>
             <p>Vous pouvez-nous contacter :
             <ul>

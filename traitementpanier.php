@@ -8,7 +8,9 @@
 	$db_handle = mysqli_connect('localhost', 'root', '' );
 	$db_found = mysqli_select_db($db_handle, $database);
 	if ($db_found) {
-		$sql="SELECT IDobjets FROM panier WHERE 'IDacheteurs'=$_SESSION['sessionID']" ;
+		$_SESSION['passe'] = 1;
+		$ID = $_SESSION['sessionID'];
+		$sql="SELECT IDobjets FROM panier WHERE ID= $ID" ;
 		$result = mysqli_query($db_handle, $sql);
 		
 		while ($data = mysqli_fetch_assoc($result)) {
@@ -17,7 +19,8 @@
 		}
 		$length=count($interpanier);
 		for ($i=0;$i<$length;$i++){
-			$sql="SELECT * FROM objets WHERE 'ID'=$interpanier[$i]";
+			$IDobjet = intval($interpanier[$i]);
+			$sql="SELECT * FROM objets WHERE ID=$IDobjet";
 			$result = mysqli_query($db_handle, $sql);
 			while ($data = mysqli_fetch_assoc($result)) {
 				array_push($interobjets, $data);
@@ -25,17 +28,17 @@
 		}
 		//echo "inter";
 		//var_dump($inter);
-		$_SESSION['listeobjetspanier']=$interobjets
+		$_SESSION['listeobjetspanier']=$interobjets;
 		//$sql="SELECT ID FROM panier WHERE 'IDacheteurs'=$_SESSION['sessionID']";
 		//$result = mysqli_query($db_handle, $sql);
 		//while ($data = mysqli_fetch_assoc($result)) {
 		//	array_push($interpanier, $data);
 			//var_dump($data);
 		//}
-		$lenght=count($interobjet);
-		for($i=0;$i<lenght;i++){
+		$length2=count($interobjet);
+		for($i=0;$i<$length2;$i++){
 			if($interobjet[$i]['Categorie']=='enchere'){
-				$sql="SELECT ID from encheres WHERE 'IDobjets'=$interobjet[$i]['ID']";
+				$sql="SELECT ID from encheres WHERE IDobjets=$interobjet[$i]['ID']";
 				$result = mysqli_query($db_handle, $sql);
 				while ($data = mysqli_fetch_assoc($result)) {
 					array_push($interpanier, $data);
@@ -43,7 +46,7 @@
 				}
 			}
 			if($interobjet[$i]['Categorie']=='nego'){
-				$sql="SELECT ID FROM negociation WHERE  'IDobjets'=$interobjet[$i]['ID'] AND 'IDvendeur'=$_SESSION['sessionID']";
+				$sql="SELECT ID FROM negociation WHERE  IDobjets=$interobjet[$i]['ID'] AND IDvendeur= $ID";
 				$result = mysqli_query($db_handle, $sql);
 				while ($data = mysqli_fetch_assoc($result)) {
 					array_push($interpanier, $data);
