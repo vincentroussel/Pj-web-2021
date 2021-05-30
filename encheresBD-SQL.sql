@@ -31,7 +31,8 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `encheres`;
 CREATE TABLE IF NOT EXISTS `encheres` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `Prix` int(50),
+  `Prix1` int(50),
+  `Prix2` int(50),
   `Datedevente` datetime,
   `IDvendu` int(11),
   `IDobjets` int(11),
