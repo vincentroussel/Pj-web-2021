@@ -76,6 +76,7 @@
       <?php
         $length=count($_SESSION['listeobjetsvendeur']);
         $listeobjet  = $_SESSION['listeobjetsvendeur'];
+        $listeIDpanier=$_SESSION['listeIDpanier'];
         for($i=0;$i< $length;$i++){
         ?>
     </div>
@@ -115,13 +116,45 @@
       </td>
     </tr>
     <form action="suppressionobjetsvendeur.php" method="POST">
-    	<input type="hidden" name="IDobjet" value="<?php echo($listeobjet[$i]['ID']); ?> ">
+    	<input type="hidden" name="IDobjet" value="<?php echo"$listeobjet[$i]['ID']"; ?> ">
     	<tr>
             <td colspan="2" align="center">
                 <input type="submit" value="supprimer cet objet" >
             </td>
         </tr>
     </form>
+    <?php
+      if ($listeobjet[$i]['Categorie']=='enchere'){
+    ?>
+    <form action="traitementvendeurenchere.php" method="POST">
+      <input type="hidden" name="IDobjet" value="<?php echo"$listeobjet[$i]['ID']"; ?> ">
+      <input type="hidden" name="IDenchere" value="<?php echo"$listeIDpanier[$i]"; ?> ">
+      <tr>
+            <td colspan="2" align="center">
+                <input type="submit" value="voir l'enchere" >
+            </td>
+        </tr>
+    </form>
+    <?php
+      }
+      if ($listeobjet[$i]['Categorie']=='nego'){
+        $lenghtbis=count($listeIDpanier[$i]);
+        for ($j=0;$j<$lenghtbis;$j++){
+          ?>
+          <form action="traitementvendeurnego.php" method="POST">
+            <input type="hidden" name="IDobjet" value="<?php echo"$listeobjet[$i]['ID']"; ?> ">
+            <input type="hidden" name="IDnego" value="<?php echo"$listeIDpanier[$i][$j]"; ?> ">
+            <tr>
+              <td colspan="2" align="center">
+                  <input type="submit" value="<?php echo"voir la nego".$j;?>" >
+              </td>
+          </tr>
+          </form>
+    <?php
+        }
+      }
+    ?>
+
     <?php
       }
     ?>
