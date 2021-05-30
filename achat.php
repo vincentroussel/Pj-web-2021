@@ -158,6 +158,7 @@
       </tr>
     </form>
     <?php
+        }
       }
     ?>
   <div id="footer">Copyright &copy; ECE MarketPlace 2021<br>
