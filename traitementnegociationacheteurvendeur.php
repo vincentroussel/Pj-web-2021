@@ -1,8 +1,56 @@
-<?php session_start(); ?>
+<?php
+    session_start();
+    $votreoffre = isset($_POST["votreoffre"])? $_POST["votreoffre"] : "";
+    $database = "ecemarketplace";
+    //connectez-vous dans votre BDD
+    //Rappel : votre serveur = localhost | votre login = root | votre mot de pass = '' (rien)
+    $db_handle = mysqli_connect('localhost', 'root', '' );
+    $db_found = mysqli_select_db($db_handle, $database);
+    //si le BDD existe, faire le traitement
+    if ($db_found) {
+        $sql="UPDATE prixacheteur FROM negociation SET '$votreoffre' WHERE 'ID'=$_SESSION['IDnego']";
+        $result = mysqli_query($db_handle, $sql);
+        $sql="SELECT prixvendeur FROM negociation WHERE 'ID'=$_SESSION['IDnego']";
+        $result = mysqli_query($db_handle, $sql);
+        while ($data = mysqli_fetch_assoc($result)) {
+            $offrevendeur=$data;
+        }
+        if ($offrevendeur==$votreoffre){
+            $sql="UPDATE IDvendu FROM objets SET '1' WHERE 'ID'=$_SESSION['IDobjet']";
+            $result = mysqli_query($db_handle, $sql);
+            $message='La negociation est terminee, vous avez acheté cet arcticle';
+        }
+        else{
+            $sql="SELECT nbetapes FROM negociation WHERE 'ID'=$_SESSION['IDobjet']";
+            $result = mysqli_query($db_handle, $sql);
+            while ($data = mysqli_fetch_assoc($result)) {
+                $inter=$data;
+            }
+            if($inter==10){
+                $sql="DELETE FROM panier WHERE 'IDacheteurs'=$_SESSION['sessionID'] AND 'IDobjets'=$_SESSION['IDobjet']";
+                $result = mysqli_query($db_handle, $sql);
+                //renvoi vers un message informant que la négo est finie
+                $message='La negociation est terminee, vous avez dépassé le nombre max de negociations';
+            }
+            else{
+                $inter=$inter+1;
+                $sql="UPDATE nbetapes FROM negociation SET '$inter' WHERE 'ID'=$_SESSION['IDnego']";
+                $result = mysqli_query($db_handle, $sql);
+                //renvoi vers une page disant que la negociation continue
+                $message='La negociation continue';
+            }
+        }
+    }
+    else {
+        echo "Database not found";
+    }//end else
+    //fermer la connection
+    mysqli_close($db_handle);
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <title>Bienvenue sur la page négociations acheteur/vendeur de l'ECE MarketPlace</title>
+    <title>negociation</title>
     <meta charset="utf-8">
     <meta name= "viewport" content= "width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -22,19 +70,22 @@
              margin-bottom: 0;
              border-radius: 0;
         }
+
         #footer{
             background-color: #17A2B8;
             color: white;
         }
     </style>
 </head>
-<div class="container-fluid">
+<body>
+    <div class="container-fluid">
         <div class="row; text-white bg-info">
-            <h1 class="text-center">Bienvenue sur la page des négociations acheteur/vendeur de l'ECE MarketPlace <img src="ecemarketplace.jpg"></h1>
+            <h1 class="text-center">Bienvenue sur votre espace negociation de l'ECE MarketPlace <img src="ecemarketplace.jpg"></h1>
         </div>
         <div class="row; text-white bg-info">
             <p>L'ECE MarketPlace est un site de vente en ligne pour la communauté ECE.<br> Vendez ou bien achetez, des produits de bonne qualité en utilisant nos diverses méthodes : négociation, vente aux enchères ou tout simplement en achat/vente instantané(e).<br> ECE MarketPlace, la plateforme de vente où tout devient possible.</p>
         </div>
+
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -46,7 +97,7 @@
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-expand">
-                        <li><a href="accueilacheteur.html">Accueil</a></li>
+                        <li ><a href="accueilacheteur.html">Accueil</a></li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"aria-haspopup="true"aria-expanded="false">Tout Parcourir</a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -59,7 +110,6 @@
                         
                     </ul>
                     <ul class="nav navbar-nav navbar-right navbar-expand">
-                        <li class="active"><a href="negociationacheteurvendeur.html">Négociations</a></li>
                         <li><a href="panier.php"><span class="glyphicon glyphicon-log-in"></span> Panier <img src="panier.jpg" width="20" height="20"></a></li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="votrecompte.html" id="navbarDropdownMenuLink" data-toggle="dropdown"aria-haspopup="true"aria-expanded="false">Votre Compte</a>
@@ -72,38 +122,7 @@
                 </div>
             </div>
         </nav>
-        <h2>Négociations en cours</h2>
-        <form action="affichernegoacheteurvendeur.php" method="POST">
-            <tr>
-                <td colspan="2" align="center">
-                <input type="submit" value="voir les infos de la négociation" >
-            </td>
-            </tr>
-        </form>
-        <table>
-            <tr>
-                <td>Votre dernière offre</td>
-                <td><?php echo "$_SESSION['prixacheteur']"?> euros;</td>
-            </tr>
-            <tr>
-                <td>Dernière offre du vendeur</td>
-                <td><?php echo "$_SESSION['prixvendeur']"?> euros;</td>
-            </tr>
-        </table>
-
-    <form action="negociationacheteurvendeur.php" method="POST">
-        <table>
-            <tr>
-                <td>Votre offre :</td>
-                <td><input type="number" name="votreoffre"></td>
-            </tr>
-            <tr>
-                <td colspan="2" align="center">
-                <input type="submit" value="Négocier" >
-            </td>
-            </tr>
-        </table>
-    </form><br>
+    <?php echo"message" ?>
         <div id="footer">Copyright &copy; ECE MarketPlace 2021<br>
             <p>Vous pouvez-nous contacter :
             <ul>
