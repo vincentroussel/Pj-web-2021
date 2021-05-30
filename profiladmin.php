@@ -1,3 +1,6 @@
+<?php
+  session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,7 +33,7 @@
 <body>
 <div class="container-fluid">
     <div class="row; text-white bg-info">
-      <h1 class="text-center">Bienvenue sur votre profil vendeur de l'ECE MarketPlace <img src="ecemarketplace.jpg"></h1>
+      <h1 class="text-center">Bienvenue sur votre profil admin de l'ECE MarketPlace <img src="ecemarketplace.jpg"></h1>
     </div>
     <div class="row; text-white bg-info">
       <p>L'ECE MarketPlace est un site de vente en ligne pour la communauté ECE.<br> Vendez ou bien achetez, des produits de bonne qualité en utilisant nos diverses méthodes : négociation, vente aux enchères ou tout simplement en achat/vente instantané(e).<br> ECE MarketPlace, la plateforme de vente où tout devient possible.</p>
@@ -46,16 +49,18 @@
           </div>
           <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-expand">
-                <li><a href="pagevendeur.html">Accueil</a></li>
-                <li><a href="#">Evaluer mon bien</a></li>
-                <li><a href="misevente.html">Vendre un bien</a></li>
-                <li><a href="espacevente.html">Mon espace de vente</a></li>
+                <li class="active"><a href="accueiladmin.html">Accueil</a></li>
+                <li><a href="miseventeadmin.html">Vendre un bien</a></li>
+                <li><a href="consulterobjetsadmin.php">Mon espace de vente</a></li>
+                <li><a href="ajoutervendeur.html">Ajouter un vendeur</a></li>
+                <li><a href="supprimervendeur.html">Supprimer un vendeur</a></li>
+                <li><a href="supprimerobjet.html">Supprimer un objet</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right navbar-expand">
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="votrecompte.html" id="navbarDropdownMenuLink" data-toggle="dropdown"aria-haspopup="true"aria-expanded="false">Votre Compte</a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="profilvendeur.html">Mon Profil</a>
+                    <a class="dropdown-item" href="profiladmin.php">Mon Profil</a>
                     <a class="dropdown-item" href="votrecompte.html">Déconnexion</a>
                   </div>
                 </li>
@@ -67,7 +72,7 @@
     <br>
     <br>
     <br>
-    <form action="traitementprofilvendeur.php" method="POST">
+    <form action="traitementprofiladmin.php" method="POST">
     	     <tr>
                 <td colspan="2" align="center">
                 <input type="submit" value="voir mon profil" >
