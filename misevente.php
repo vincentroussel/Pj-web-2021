@@ -139,7 +139,7 @@
 			
 		}else{
 			//on ajoute l'article dans la BDD
-			$sql = "INSERT INTO objets(IDvendeur, Nom, Prix, Defauts, Qualites, Typevente, Categorie) VALUES($id,'$nom', $prix ,'$defauts','$qualites','$categorievente','$categorieobjet')";
+			$sql = "INSERT INTO objets(IDvendeur, Nom, Prix, Defauts, Qualites, Typevente, Categorie,IDvendu) VALUES($id,'$nom', $prix ,'$defauts','$qualites','$categorievente','$categorieobjet',0)";
 			$result = mysqli_query($db_handle,$sql);
 			echo "Ajout confirmé <br>";
 			//on affiche l'objet ajouté
