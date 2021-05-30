@@ -20,7 +20,7 @@
 		$length=count($interpanier);
 		for ($i=0;$i<$length;$i++){
 			$IDobjet = intval($interpanier[$i]);
-			$sql="SELECT * FROM objets WHERE ID=$IDobjet";
+			$sql="SELECT * FROM objets WHERE ID=$IDobjet AND IDvendu = 0";
 			$result = mysqli_query($db_handle, $sql);
 			while ($data = mysqli_fetch_assoc($result)) {
 				array_push($interobjets, $data);
