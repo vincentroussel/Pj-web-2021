@@ -14,5 +14,5 @@
  		echo "Database not found";
 	}
 	mysqli_close($db_handle);
-	header('Location: consulterobjets.php');
+	header('Location: consulterobjetsadmin.php');
 ?>

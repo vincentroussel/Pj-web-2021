@@ -6,5 +6,5 @@
 	$_SESSION['IDobjet']=$IDobjet;
 	$_SESSION['IDenchere']=$IDenchere;
 
-	header('Location: encherevendeur.html');
+	header('Location: enchereadmin.html');
 ?>
